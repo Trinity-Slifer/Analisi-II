@@ -1,0 +1,1168 @@
+\documentclass[leqno]{article}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{amsthm}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+
+\makeatletter
+\newcommand\xLeftrightarrow[2][]{%
+	\ext@arrow 9999{\Longleftrightarrowfill@}{#1}{#2}}
+\newcommand\Longleftrightarrowfill@{%
+	\arrowfill@\Leftarrow\Relbar\Rightarrow}
+\makeatother
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\input xy
+\xyoption{all}
+\begin{document}
+	
+	\title{Domande Analisi II}
+	\author{D'Agosta Nicola}
+	\date{Gennaio 2023}
+	\maketitle
+	\vspace{8.0cm}
+	
+	
+	Risposte all'elenco di domande del file "Analisi - Theory Exam questions-1", dovrebbero mancare solamente i disegni e le dimostrazioni non fatte a lezione. Le risposte sono principalmente frutto di appunti, lavagne dell'Abenda e del libro "Lezioni di analisi matematica due" di Fusco-Marcellini-Sbordone, Zanichelli Editore. Per qualsiasi domanda/errore non esitare a contattarmi, spero questo file possa essere utile. 
+	
+	\vspace{1.0cm}
+	
+	Nel caso vogliate offrire un caffè paypal.me/TrinitySlifer
+	\newpage
+	\tableofcontents 
+	\newpage
+	
+	
+	
+	\section{Topologia degli spazi metrici}
+	\begin{definition}[Spazio metrico]
+		Sia X un insieme e sia $d:X\times X \rightarrow [0,+ \infty)$ che ad ogni coppia $(x,y)$ di punti di un insieme X associa un numero reale $d(x,y)\ge 0$. Si dice che $d$ é una distanza o metrica su X se sono verificate le seguenti condizioni: 
+		\begin{equation} 
+			\begin{split}
+				&d(x,y) = 0 \\
+				&d(x,y)=d(y,x)\\
+				&d(x,y)\le d(x,z) + d(z,y)
+			\end{split}
+			\quad
+			\begin{split}
+				\quad \Leftrightarrow x = y, \quad \quad \forall x,y \in X; \\
+				\forall x,y \in X;\\
+				\forall x,y,z \in X;
+			\end{split}
+		\end{equation}
+		Allora se $d$ è una distanza sull'insieme X, si dice che (X,$d$) è uno spazio metrico. Esempi di s.m. possono essere lo spazio euclideo con la distanza $d_2$, lo spazio delle funzioni continue e di quelle limitate con la distanza $d_\infty$, un insieme qualsiasi con la metrica delta.
+	\end{definition}
+	\begin{definition}[Intorno circolare aperto]
+		Per ogni $x_0\in X$ e per ogni $r > 0 $, si chiama intorno circolare aperto (o palla aperta) di centro $x_0$ e raggio $r$, l'insieme
+		\begin{equation}
+			B(x_0,r)=\{x \in X : d(x_0,x)< r\}.
+		\end{equation}
+	\end{definition}
+	
+	
+	\begin{definition}[Insieme aperto in uno s.m.]
+		Un insieme $A\subseteq X$ si dice aperto se ogni suo punto é centro di un intorno circolare contenuto in A, in altre parole $\forall x_0 \in X \quad \exists B(x_0,r)\subseteq A$. 
+	\end{definition}
+	
+	\begin{definition}[Proprietà degli aperti]
+		Sia $(X,d)$ uno s.m.:
+		\begin{enumerate}
+			\item $X,\emptyset$ sono aperti.
+			\item Unione arbitraria di aperti è un aperto.
+			\item Intersezione finita di aperti è un aperto.
+		\end{enumerate}
+		
+	\end{definition}
+	\begin{definition}[Insieme chiuso]
+		Un insieme $C \subseteq X$ si dice chiuso se il suo complementare $X \setminus C$ è aperto.
+	\end{definition}
+	
+	\begin{definition}[Proprietà dei chiusi]
+		Sia $(X,d)$ uno s.m.:
+		\begin{enumerate}
+			\item $X,\emptyset$ sono chiusi.
+			\item Intersezione arbitraria di chiusi è un chiuso.
+			\item Unione finita di chiusi è un chiuso.
+		\end{enumerate}
+	\end{definition}
+	
+	\begin{definition}[Punto interno]
+		Un punto $x_0$ si dice interno all'insieme $I\subseteq X$ se esiste un intorno circolare aperto di $x_0$ totalmente contenuto in I, in altre parole $x_0$ é detto interno a I se  $ \exists r>0 : B(x_0,r)\subseteq I$. 
+	\end{definition}
+	\begin{definition}[Punto di aderenza]
+		Un punto $x_0$ si dice aderente all'insieme $I\subseteq X$ se ogni suo intorno ha una intersezione non nulla con l'insieme, in altre parole $x_0$ si dice aderente a I se $\forall r > 0 \quad B(x_0,r)\cap I \neq \emptyset $.
+	\end{definition}
+	\begin{definition}[Punto di frontiera]
+		Un punto $x_0$ si dice di frontiera per l'insieme $I\subseteq X$ se ogni suo punto ha intersezione non nulla con I e il suo complementare, in altre parole $x_0$ punto di frontiera per I se $\forall r>0 \quad B(x_0,r)\cap I \neq \emptyset, B(x_0,r)\cap X\setminus I \neq \emptyset $.
+	\end{definition}
+	\begin{definition}[Punto di accumulazione]
+		Un punto $x_0$ si dice di accumulazione per l'insieme $I\subseteq X$ se ogni intorno di $x_0$ con $x_0$ escluso ha intersezione non  nulla con l'insieme, in altre parole $x_0$ si dice di accumulazione per I se $\forall r > 0 \quad B(x_0,r)\cap (I-x)\neq \emptyset$.
+	\end{definition}
+	\begin{definition}[Interno]
+		L'insieme dei punti interni a $I\subseteq X$ si chiama interno di I e si indica con int(I). L'interno di un insieme può anche essere visto come l'unione di tutti gli aperti contenuti nell'insieme.
+	\end{definition}
+	\begin{definition}[Frontiera]
+		L'insieme dei punti di frontiera di $I\subseteq X$ è detto frontiera di I e si indica con $\partial I$.
+	\end{definition}
+	\begin{definition}[Chiusura]
+		L'unione di un insieme $I\subseteq X$ con la sua frontiera è detta chiusura dello stesso e si indica con cl(I). (cl(I) = $I \cup \partial I$) 
+	\end{definition}
+	\section{Spazi metrici completi}
+	\begin{definition}[Spazio metrico]
+		Sia X un insieme e sia $d:X\times X \rightarrow [0,+ \infty)$ che ad ogni coppia $(x,y)$ di punti di un insieme X associa un numero reale $d(x,y)\ge 0$. Si dice che $d$ é una distanza o metrica su X se sono verificate le seguenti condizioni: 
+		\begin{equation} 
+			\begin{split}
+				&d(x,y) = 0 \\
+				&d(x,y)=d(y,x)\\
+				&d(x,y)\le d(x,z) + d(z,y)
+			\end{split}
+			\quad
+			\begin{split}
+				\quad \Leftrightarrow x = y, \quad \quad \forall x,y \in X; \\
+				\forall x,y \in X;\\
+				\forall x,y,z \in X;
+			\end{split}
+		\end{equation}
+		Allora se $d$ è una distanza sull'insieme X, si dice che (X,$d$) è uno spazio metrico.
+	\end{definition}
+	\begin{definition}[Successione]
+		Sia $(X,d)$ uno spazio metrico una funzione $f:\mathbb{N} \rightarrow X$ è detta successione di punti su X.
+	\end{definition}
+	\begin{definition}[Successione convergente]
+		Sia $(X,d)$ uno spazio metrico, sia $\{ x_k \} _{k \in \mathbb{N}}$ una successione in X, si dice che $x_k$ converge verso $x_0$ se $\forall \varepsilon \in \mathbb{R}, \; \exists  \nu \in \mathbb{N}$ tale che:
+		\begin{equation}
+			\begin{split}
+				d(x_k,x_0)<\varepsilon
+			\end{split}
+			\quad  \quad 
+			\begin{split}
+				\forall k \ge \nu.
+			\end{split}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Successione di Cauchy]
+		Sia $(X,d)$ uno spazio metrico, sia $\{x_k\}_{k\in\mathbb{N}}$ una successione in X, si dice che $x_k$ è di Cauchy se $\forall \varepsilon \in \mathbb{R}, \; \exists  \nu \in \mathbb{N}$ tale che:
+		\begin{equation}
+			\begin{split}
+				d(x_m,x_n)<\varepsilon
+			\end{split}
+			\quad  \quad 
+			\begin{split}
+				\forall m,n \ge \nu.
+			\end{split}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Spazio metrico completo]
+		Sia $(X,d)$ uno spazio metrico, è detto completo se ogni successione di Cauchy è convergente in un punto $x_0 \in X$.
+	\end{definition}
+	
+	\begin{theorem}[Principio di Cantor]
+		Sia $(X,d)$ uno spazio metrico è completo iff per ogni successione di insiemi chiusi non vuoti tali che $F_k \in X$, $F_{k+1} \subseteq F_k$ si ha che $\bigcap_{k\in\mathbb{N}}F_k\neq \emptyset$.
+	\end{theorem}
+	\begin{theorem}[Completamento di uno s.m.]
+		Sia $(X,d)$ uno spazio metrico, un completamento di X è una coppia $(Y,\phi)$ tale che Y è uno spazio metrico completo, $\phi$ una isometria tra X tale che $\phi(X)$ è denso in Y.
+	\end{theorem}
+	\section{Funzione continue tra spazi metrici}
+	\begin{definition}[Spazio metrico]
+		Sia X un insieme e sia $d:X\times X \rightarrow [0,+ \infty)$ che ad ogni coppia $(x,y)$ di punti di un insieme X associa un numero reale $d(x,y)\ge 0$. Si dice che $d$ é una distanza o metrica su X se sono verificate le seguenti condizioni: 
+		\begin{equation} 
+			\begin{split}
+				&d(x,y) = 0 \\
+				&d(x,y)=d(y,x)\\
+				&d(x,y)\le d(x,z) + d(z,y)
+			\end{split}
+			\quad
+			\begin{split}
+				\quad \Leftrightarrow x = y, \quad \quad \forall x,y \in X; \\
+				\forall x,y \in X;\\
+				\forall x,y,z \in X;
+			\end{split}
+		\end{equation}
+		Allora se $d$ è una distanza sull'insieme X, si dice che (X,$d$) è uno spazio metrico.
+	\end{definition}
+	\begin{definition}[Spazio metrico completo]
+		Sia $(X,d)$ uno spazio metrico, è detto completo se ogni successione di Cauchy è convergente in un punto $x_0 \in X$.
+	\end{definition}
+	\begin{definition}[Funzioni continue]
+		Siano $(X,\tau_1)$ e $(Y,\tau_2)$ spazi topologici, sia $f: X\rightarrow Y$ una applicazione allora $f$ è detta continua se:
+		\begin{enumerate}
+			\item $\forall A$ aperto in Y $f^{-1}(A)$ è aperto in X.
+			\item $\forall C$ chiuso in Y $f^{-1}(C)$ è chiuso in X. (equivalente a quella sopra per definizione di chiuso)
+			\item $\forall x_0 \in X$, $\forall V$ intorno di $f(x_0)$, $\exists U$ intorno di $x_0 : \; f(U)\subseteq V$.
+		\end{enumerate}
+		Inoltre se $X,Y$ sono dotati di metriche rispettivamente $d_X, d_y$ allora $f$ è detta continua se:
+		\begin{enumerate}
+			\item $\forall x_0 \in A \subseteq X, \forall \varepsilon > 0, \; \exists \delta > 0$ tale che se $d_X(x_0,x)< \delta$ allora $d_Y(f(x_0),f(x)) < \varepsilon$.
+			\item sia E dominio di $f$, $\forall \varepsilon > 0 \; \; \exists \delta > 0 : f(E \cap B(x_0,\delta)) \subset B(f(x_0),\varepsilon)$ 
+		\end{enumerate}
+	\end{definition}
+	\begin{definition}[Funzione uniformemente continua]
+		Siano $(X,d_X)$ e $(Y,d_Y)$ spazi metrici, sia $f:X\rightarrow Y$ una funzione, $f$ è detta uniformemente continua se : $\forall \varepsilon > 0, \exists \delta > 0 $ tale che se $d_X(x_0,x) < \delta$ allora $d_Y(f(x_0),f(x)) < \varepsilon$.
+	\end{definition}
+	\begin{definition}[Lipschitzianitá]
+		Siano $(X,d_X)$ e $(Y,d_Y)$ spazi metrici, sia $f:X\rightarrow Y$ una funzione, $f$ è detta di lipschitz se: $\exists L$ tale che $\forall x,y \in X, \quad d_Y(f(x),f(y)<Ld_X(x,y)$.
+	\end{definition}
+	\begin{definition}[Isometria]
+		Siano $(X,d_X)$ e $(Y,d_Y)$ spazi metrici, sia $f:X\rightarrow Y$ una funzione, $f$ è detta una isometria se $\forall x,y \in X, \quad d_X(x,y)=d_Y(f(x),f(y))$. 
+	\end{definition}
+	\begin{definition}[Distanza di un punto da un insieme]
+		Sia $(X,d)$ uno spazio metrico, sia $A\subseteq X$ sottoinsieme non vuoto e $x_0 \in X$ un punto la distanza tra $x_0$ e $A$ è definita: $d(x_0,A)=inf_{p\in A}d(x_0,p)$
+	\end{definition}
+	\begin{definition}[Contrazione]
+		Siano $(X,d_X)$ e $(Y,d_Y)$ spazi metrici, sia $f:X\rightarrow Y$ una funzione, allora $f$ è detta contrazione se è lipschitz con contante $L<1$.
+	\end{definition}
+	%\begin{definition}[Teorema delle contazioni]
+	
+	%\end{definition}
+	\section{Calcolo differenziale a più variabili}
+	
+	\begin{definition}[Derivata parziale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $ {x} \in A$ si definisce derivata parziale di $f(x)$ rispetto alla variabile $x_j$ il limite, se esiste finito: 
+		\begin{equation}
+			f_{x_j}(x)={\frac {\partial f}{\partial x_{j}}}(  {x} )=\lim _{t\to 0}{\frac {f(  {x} +t  \hat{e_{j}})-f(  {x} )}{t}}=\lim _{t\to 0}{\frac {f(x_{1},x_{2},\dots, x_{j}+t,\dots ,x_{n})-f(x_{1},x_{2},\dots ,x_{n})}{t}}.
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Derivata direzionale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\hat{\nu} \in \mathbb{R}, \lVert \hat{\nu} \rVert = 1$ è detta derivata direzionale in $ {x} \in A$ rispetto a $\hat{\nu}$ se esiste finito il limite:
+		\begin{equation}
+			f_{\hat{\nu}}(x)={\frac {\partial f}{\partial \hat{\nu}}(  {x} )=\lim _{h\rightarrow 0}{\frac {f( x +h  \hat{\nu} )-f( {x} )}{h}}.}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Gradiente]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, il gradiente di $f$ in $ {x} \in A$ è il vettore le cui componenti, se esistono, sono le derivate parziali di $f(x)$:
+		\begin{equation}
+			\nabla f(x) =grad \; f(x) = \begin{bmatrix}
+				f_{x_1}(x)\\ f_{x_2}(x)\\\vdots \\f_{x_n}(x)
+			\end{bmatrix}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Differenziale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $f$ è detta differenziabile in in $ {x} \in A$ se $\exists m \in \mathbb{R}$ tale che: 
+		\begin{equation}
+			f(x+h)=f(x)+\langle m , h \rangle + o(|h|) \quad \quad h\rightarrow 0
+		\end{equation}
+	\end{definition}
+	
+	in tal caso $m$ è detto differenziale di $f$ in $x$.
+	
+	\begin{theorem}[Teoremi sulle relazioni fra derivate parziali, differenziabilità, continuità e derivate direzionali]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $ {x} \in A$.
+		\newline
+		
+		\textbf{Proprietà delle funzioni differenziabili}:
+		Sia $f$ differenziabile in $x$ allora :
+		\begin{enumerate}
+			\item $f$ è continua in $x$.
+			\item $m=\nabla f (x)$, cioè esistono le derivate di $f$ e $m_i=f_{x_j}(x).$ La differenziabilità implica quindi la derivabilità in un punto, non è vero invece il contrario.
+			\item $\forall \hat{\nu} \in \mathbb{R}^3, \lVert \hat{\nu} \rVert \quad \exists \, \dfrac{\partial f }{\partial \hat{\nu}}(x)$.
+		\end{enumerate} 
+		$\quad$ \textbf{Differenziale totale}: Se esistono $f_{x_i}(x), \; \forall i = 1, \dots ,n$ in un intorno di $x$ e sono continue in $x$ allora $f$ è differenziabile in $x$.
+		\\
+		\textbf{Derivate direzionali nel caso delle funzioni differenziabili}: 
+		\begin{equation}
+			\left| \dfrac{\partial f}{\partial \hat{\nu}}(x) \right|=\left| \langle \nabla f(x), \hat{\nu}\rangle \right| \le \lVert \nabla f(x)\rVert \cdot \lVert \hat{\nu} \rVert = \lVert \nabla f(x) \rVert.
+		\end{equation}
+		Questa formula implica che la direzione del gradiente è quella di massima variazione di $f$.
+	\end{theorem}
+	
+	\begin{definition}[Piano tangente al grafico di una funzione]
+		Siano $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ differenziabile, $ {x_0} \in A$ definisco come segue la funzione $g$:
+		\begin{equation}
+			g(x) = f(x_0)=\langle \nabla f (x_0) , x-x_0\rangle .
+		\end{equation}
+		I grafici di queste due funzioni sono definiti:
+		\begin{equation}
+			\begin{aligned}
+				&\text{Grafico di $f$ } \Gamma_f =\{ (x,y)\in \mathbb{R}^n \times \mathbb{R} : y = f(x) \} \subseteq \mathbb{R}^{n+1} \\
+				&\text {Grafico di $g$ } \Gamma_g = \{ (x,y)\in \mathbb{R}^n \times \mathbb{R} : y = f(x_0) + \langle \nabla f(x_0) , x - x_0 \rangle \} \subseteq \mathbb{R}^{n+1}.
+			\end{aligned}
+		\end{equation}
+		dove $\Gamma_g$ è un iperpiano n-dimensionale tangente al grafico nel punto $(x_0,f(x_0))$. $g$ approssima la funzione $f(x)$ nel punto $x=x_0$ a meno di infinitesimi di ordine superiore alla distanza $\lVert x-x_0 \rVert$.
+	\end{definition}
+	
+	\begin{definition}[Derivata parziale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$ funzione a valori vettoriali definita su un aperto $A$, $ {x} \in A$ si definisce derivata parziale di $f(x)$ rispetto alla variabile $x_j$ il limite, se esiste finito: 
+		\begin{equation}
+			{\frac {\partial f_i(  {x} )}{\partial x_{j}}}=\lim _{t\to 0}{\frac {f_i(  {x} +t  \hat{e_{j}})-f(  {x} )}{t}}=\lim _{t\to 0}{\frac {f_i(x_{1},x_{2},\dots, x_{j}+t,\dots ,x_{n})-f_i(x_{1},x_{2},\dots ,x_{n})}{t}}.
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Jacobiano]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$ funzione a valori vettoriali definita su un aperto $A$, sia derivabile rispetto a tutte le variabili in $ {x} \in A$ è detto Jacobiano di $f$ in $x$ la matrice $m \times n$:
+		\begin{equation}
+			J_f(x)=\begin{bmatrix}
+				\dfrac{\partial f_i}{\partial x_j}(x)
+			\end{bmatrix}_{\substack{i=1,\dots ,m \\ j=1,\dots ,n}}
+		\end{equation}
+	\end{definition}
+	
+	\begin{theorem}[Jacobiano della funzione composta]
+		Siano $f:A\subseteq \mathbb{R}^n \rightarrow B, g:B \subseteq \mathbb{R}^m \to \mathbb{R}^l$ funzioni a valori vettoriali definita sugli aperti $A, B$ tali che siano differenziabili rispettivamente in $x_0\in A, y_0=f(x_0) \in B$. Allora $g\circ f : A \to \mathbb{R}^l$ è differenziabile in $x_0$ e:
+		\begin{equation}
+			J_{g\circ f}(x_0)=\begin{bmatrix}
+				\dfrac{\partial (g \circ f)}{\partial x_j}(x_0)
+			\end{bmatrix} = J_g(f(x_0)) J_f(x_0)=\begin{bmatrix}
+				\langle \nabla g_1(f(x_0)),\dfrac{\partial f}{\partial x_i}(x_0)\rangle & \dots & \langle \nabla g_1(f(x_0)),\dfrac{\partial f}{\partial x_n}(x_0)\rangle \\ \vdots &\ddots &\vdots \\ \langle \nabla g_l(f(x_0)),\dfrac{\partial f}{\partial x_i}(x_0)\rangle & \dots & \langle \nabla g_l(f(x_0)),\dfrac{\partial f}{\partial x_n}(x_0)\rangle 
+			\end{bmatrix}
+		\end{equation}
+	\end{theorem}
+	
+	\begin{theorem}[Jacobiano della funzione inversa]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow B \subseteq \mathbb{R}^n$ con $A,B$ aperti, di classe $C^1$ allora:
+		\begin{equation}
+			J_{f^{-1}}(y) = J_f^{-1}(f^-1(y)) \quad \forall y \in B.
+		\end{equation}
+		\begin{proof}
+			$(f\circ f^{-1})(y)=y, \quad \forall \, x \in B$ per la teorema del Jacobiano della funzione composta si ha: 
+			\begin{equation}
+				I=J_{(f \circ f^{-1})}(y)=J_{f^{-1}}(y)J_f(f^-1(y))
+			\end{equation}
+			da cui la tesi. 
+		\end{proof}
+	\end{theorem}
+	
+	
+	\section{Calcolo differenziale a più variabili II}
+	
+	\begin{definition}[Derivata parziale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $ {x} \in A$ si definisce derivata parziale di $f(x)$ rispetto alla variabile $x_j$ il limite, se esiste finito: 
+		\begin{equation}
+			f_{x_j}={\frac {\partial f}{\partial x_{j}}}(x)=\lim _{t\to 0}{\frac {f(  {x} +t  \hat{e_{j}})-f(  {x} )}{t}}=\lim _{t\to 0}{\frac {f(x_{1},x_{2},\dots, x_{j}+t,\dots ,x_{n})-f(x_{1},x_{2},\dots ,x_{n})}{t}}.
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Derivata direzionale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\hat{\nu} \in \mathbb{R}, \lVert \hat{\nu} \rVert = 1$ è detta derivata direzionale in $ {x} \in A$ rispetto a $\hat{\nu}$ se esiste finito il limite:
+		\begin{equation}
+			f_{\hat{\nu}}(x)={\frac {\partial f}{\partial \hat{\nu}}(  {x} )=\lim _{h\rightarrow 0}{\frac {f( x +h  \hat{\nu} )-f( {x} )}{h}}.}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Gradiente]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, il gradiente di $f$ in $ {x} \in A$ è il vettore le cui componenti, se esistono, sono le derivate parziali di $f(x)$:
+		\begin{equation}
+			\nabla f(x) = grad \; f(x) = \begin{bmatrix}
+				f_{x_1}(x)\\ f_{x_2}(x)\\\vdots \\f_{x_n}(x)
+			\end{bmatrix}
+		\end{equation}
+	\end{definition}
+	\begin{definition}[Differenziale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $f$ è detta differenziabile in in $ {x} \in A$ se $\exists m \in \mathbb{R}$ tale che: 
+		\begin{equation}
+			f(x+h)=f(x)+\langle m , h \rangle + o(|h|) \quad \quad h\rightarrow 0
+		\end{equation}
+	\end{definition}
+	
+	in tal caso $m$ è detto differenziale di $f$ in $x$.
+	
+	\begin{theorem}[Teoremi sulle relazioni fra derivate parziali, differenziabilità, continuità e derivate direzionali]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $ {x} \in A$.
+		\newline
+		
+		\textbf{Proprietà delle funzioni differenziabili}:
+		Sia $f$ differenziabile in $x$ allora :
+		\begin{enumerate}
+			\item $f$ è continua in $x$.
+			\item $m=\nabla f (x)$, cioè esistono le derivate di $f$ e $m_i=f_{x_j}(x).$ La differenziabilità implica quindi la derivabilità in un punto, non è vero invece il contrario.
+			\item $\forall \hat{\nu} \in \mathbb{R}^3, \lVert \hat{\nu} \rVert \quad \exists \, \dfrac{\partial f }{\partial \hat{\nu}}(x)$.
+		\end{enumerate} 
+		$\quad$ \textbf{Differenziale totale}: Se esistono $f_{x_i}(x), \; \forall i = 1, \dots ,n$ in un intorno di $x$ e sono continue in $x$ allora $f$ è differenziabile in $x$.
+		\\
+		\textbf{Derivate direzionali nel caso delle funzioni differenziabili}: 
+		\begin{equation}
+			\left| \dfrac{\partial f}{\partial \hat{\nu}}(x) \right|=\left| \langle \nabla f(x), \hat{\nu}\rangle \right| \le \lVert \nabla f(x)\rVert \cdot \lVert \hat{\nu} \rVert = \lVert \nabla f(x) \rVert.
+		\end{equation}
+		Questa formula implica che la direzione del gradiente è quella di massima variazione di $f$.
+	\end{theorem}
+	
+	\begin{definition}[Piano tangente al grafico di una funzione]
+		Siano $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ differenziabile, $ {x_0} \in A$ definisco come segue la funzione $g$:
+		\begin{equation}
+			g(x) = f(x_0)+\langle \nabla f (x_0) , x-x_0\rangle .
+		\end{equation}
+		I grafici di queste due funzioni sono definiti:
+		\begin{equation}
+			\begin{aligned}
+				&\text{Grafico di $f$ } \Gamma_f =\{ (x,y)\in \mathbb{R}^n \times \mathbb{R} : y = f(x) \} \subseteq \mathbb{R}^{n+1} \\
+				&\text {Grafico di $g$ } \Gamma_g = \{ (x,y)\in \mathbb{R}^n \times \mathbb{R} : y = f(x_0) + \langle \nabla f(x_0) , x - x_0 \rangle \} \subseteq \mathbb{R}^{n+1}.
+			\end{aligned}
+		\end{equation}
+		dove $\Gamma_g$ è un iperpiano n-dimensionale tangente al grafico nel punto $(x_0,f(x_0))$. $g$ approssima la funzione $f(x)$ nel punto $x=x_0$ a meno di infinitesimi di ordine superiore alla distanza $\lVert x-x_0 \rVert$.
+	\end{definition}
+	
+	\begin{definition}[Derivate di ordine superiore]
+		Supponendo $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ derivabile in $x\in A$ rispetto a tutte le variabili, definisco la derivata parziale rispetto a $x_i,x_j$ se esiste finito il limite :
+		\begin{equation}
+			f_{x_ix_j}=\frac{\partial 
+			}{\partial x_i}\left({\frac {\partial f}{\partial x_{j}}}\right)(x)=\lim _{t\to 0}{\frac {\dfrac {\partial f}{\partial x_{j}}(  {x} +t  \hat{e_{i}})-\dfrac {\partial f}{\partial x_{j}}(  {x} )}{t}}
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Matrice Hessiana]
+		Supponendo $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ derivabile due volte in $x$ rispetto a tutte le variabili, è detta matrice Hessiana o matrice delle derivate seconde la matrice $n \times n$:
+		\begin{equation}
+			H_f(x)=\begin{bmatrix}
+				f_{x_ix_j}(x)
+			\end{bmatrix}=\begin{bmatrix}
+				f_{x_1x_1}(x) & \dots & f_{x_1x_n}(x)\\
+				\vdots & \ddots & \vdots \\
+				f_{x_nx_1}(x) & \dots & f_{x_nx_n}(x)
+			\end{bmatrix}.
+		\end{equation}
+	\end{definition}
+	
+	\begin{theorem}[Lemma di Schwartz v.1]
+		Supponendo $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ derivabile due volte in $x\in A$ rispetto a tutte le variabili con tutte le derivate seconde continue allora $H_f(x)$ è simmetrica.
+	\end{theorem}
+	
+	\begin{definition}[Funzione differenziabile due volte ]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, $x\in A$ allora $f$ è detta differenziabile due volte se $f$ è differenziabile in un intorno aperto di $x$ e $f_{x_j}(x)$ sono funzioni differenziabili in $x$.
+	\end{definition}
+	
+	\begin{theorem}[Lemma di Schwartz v.2]
+		Supponendo $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ differenziabile due volte in $x$ allora $H_f(x)$ è simmetrica.
+	\end{theorem}
+	
+	\begin{theorem}[Formula di Taylor al secondo ordine]
+		Sia $f\in C^2(A,\mathbb{R})$ con $A\in \mathbb{R}^n$ aperto connesso allora $\forall \, x_0 \in A$:
+		\begin{equation}
+			f(x)=f(x_0)+\langle \nabla f(x_0), x-x_0\rangle + \frac{1}{2}\langle H_f(x_0)(x-x_0),x-x_0 \rangle + o(\lVert x-x_0 \rVert ^2)
+		\end{equation}
+	\end{theorem}
+	
+	\section{Massimi e minimi locali}
+	
+	\begin{definition}[Massimo locale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, il punto $x_0 \in A$ è detto di massimo locale se $\exists B(x_0,r) : f(x_0)\ge f(x) \quad \forall x \in B(x_0,r)$.
+	\end{definition}
+	
+	\begin{definition}[Minimo locale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, il punto $x_0 \in A$ è detto di minimo locale se $\exists B(x_0,r) : f(x_0)\le f(x) \quad \forall x \in B(x_0,r)$.
+	\end{definition}
+	
+	\begin{theorem}[Teorema di Fermat]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, se il punto $x_0 \in A$ è un estremante relativo e $f$ è derivabile allora $\nabla f(x_0)=0$.
+		
+	\end{theorem}
+	\begin{proof}
+		Essendo $x_0$ punto di massimo locale in $A$ la funzione ad una variabile $F(t)=f(x_0+e_it)$ definita in $]t-\delta,t+\delta[$ e derivabile nel dominio ha massimo relativo per $t=0$ da cui si ha $F'(0)=f_{x_i}(x_0)=0$. Il procedimento è uguale nel caso $x_0$ minimo locale.
+	\end{proof}
+	\begin{definition}[Forma quadratica]
+		Ad ogni $A \in M_{n \times n}(\mathbb{R})$ è associata una funzione $F:\mathbb{R}^n \rightarrow \mathbb{R}$ definita: 
+		\begin{equation}
+			F(\lambda)= \langle A \cdot \lambda , \lambda \rangle = a_{ij}\lambda_i \lambda_j \quad \quad \lambda \in \mathbb{R}^n.
+		\end{equation} 
+		$F(\lambda)$ è quindi un polinomio omogeneo di secondo grado in $\lambda$ ed è chiamata forma quadratica associata ad $A$. A è detta: 
+		\begin{itemize}
+			\item Definita positiva se $F(\lambda)>0 \quad \forall \lambda \in \mathbb{R}^n$.
+			\item Semidefinita positiva se $F(\lambda) \ge 0 \quad \forall \lambda \in \mathbb{R}^n$, $\exists \overline{\lambda} \in \mathbb{R}^n \text{ t.c. } F(\overline{\lambda})=0$.
+			\item Definita negativa se $F(\lambda)<0 \quad \forall \lambda \in \mathbb{R}^n$.
+			\item Semidefinita negativa se $F(\lambda)\le 0 \quad \forall \lambda \in \mathbb{R}^n$, $\exists \overline{\lambda} \in \mathbb{R}^n \text{ t.c. } F(\overline{\lambda})=0$.
+			\item Indefinita se $\exists \lambda, \mu \in \mathbb{R}^n : F(\lambda) < 0 , F(\mu) > 0$.
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}[Classificazione dei punti critici per funzioni $C^2$]
+		\begin{theorem}[Condizione sufficiente]
+			Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ di classe $C^2$, $x_0\in A$:
+			\begin{itemize}
+				\item Se $\nabla f(x_0)=(0,\dots,0)$ e $H_f(x_0)$ definita positiva allora $x_0$ è punto di minimo relativo per $f$ in $A$.
+				\item Se $\nabla f(x_0)=(0,\dots,0)$ e $H_f(x_0)$ definita negativa allora $x_0$ è punto di massimo relativo per $f$ in $A$.
+				\item Se $\nabla f(x_0)=(0,\dots,0)$ e $H_f(x_0)$ indefinita allora $x_0$ è punto di sella per $f$ in $A$.
+			\end{itemize}
+		\end{theorem}
+	\end{definition}
+	
+	\section{Varietà regolari e Dini}
+	\begin{definition}[Varietà regolare]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$. Diremo che $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ è una varietà regolare di $\mathbb{R}^n$ se $\forall x \in \Gamma \; rk(J_f(x))$ ha rango massimo cioè $k$.
+	\end{definition}
+	\begin{definition}[Spazio tangente]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$, $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ varietà regolare, $x_0\in \Gamma$ allora
+		\begin{equation}
+			T_{x_0}\Gamma=\{h\in \mathbb{R}^n | \langle \nabla f_i(x_0), h \rangle = 0\}
+		\end{equation}
+		è detto spazio tangente a $\Gamma$ in $x_0$.
+	\end{definition}
+	\begin{definition}[Spazio normale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$, $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ varietà regolare, $x_0\in \Gamma$ allora
+		\begin{equation}
+			N_{x_0}\Gamma=Span\{\nabla f_i (x_0)\}
+		\end{equation}
+		è detto spazio normale a $\Gamma$ in $x_0$.
+	\end{definition}
+	
+	\begin{theorem}[Teorema del Dini a due dimensioni]
+		Sia $g:A\subset \mathbb{R}^2 \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ di classe $C^1$, e sia $(x_{0},y_{0})\in A$ tale che: 
+		\begin{equation}
+			g(x_{0},y_{0})=0,\qquad g_{y}(x_{0},y_{0})\neq 0.
+		\end{equation}
+		Allora esistono un intervallo reale aperto $I$, con $x_0 \in I$, un intervallo reale aperto $J$, con $y_0 \in J$, ed una funzione $f(x): I \rightarrow J$ di classe $C^1$ tali che:
+		\begin{equation}
+			f'(x_{0})=-\left({\frac {g_{x}(x_{0},y_{0})}{g_{y}(x_{0},y_{0})}}\right) \quad x\in I
+		\end{equation}
+		e 
+		\begin{equation}
+			g(x,y)=0 \quad \xLeftrightarrow{\text{$(x,y)\in I\times J$}} \quad y=f(x)
+		\end{equation}
+		\begin{proof}
+			
+			\begin{description}
+				
+				\item [Esistenza di $f(x)$:] Per il teorema di permanenza del segno, esiste un rettangolo $R=[x_0-\delta,x_0+\delta]\times [y_0-\sigma, y_0+\sigma]$, tale che $g_y(x,y)\neq0, \forall(x,y)\in R$ (per comodità supponiamo il segno della derivata crescente). Per costruzione la funzione $h(y)=g(x_0,y)$ è strettamente crescente e continua per $y \in J$ e pertanto $g(x_0,y_0+\sigma)>0>g(x_0,y_0-\sigma)$. Per il teorema del segno poiché $g$ è continua esiste $0<\delta_1<\delta$ date che $g(x,y_0+\sigma)>0>g(x,y_0-\sigma), \forall \overline{x} \in [x_0-\delta_1,x_0+\delta_1]$. Pertanto $\forall x$ fissato la funzione $\overline{h}=g(\overline{x},y)$ è strettamente crescente e continua nell'intervallo $\overline{y}\in [y_0-\sigma, y_0+\sigma]$ ed esiste un unico $\overline{y}: g(\overline{x},\overline{y})=0$.
+				\item[Continuità di $f(x)$:] Verifichiamo che il $\lim\limits_{x\to \overline{x}}f(x)=f(\overline{x})$ per ogni $\overline{x}\in]x_0-\delta_1,x_0+\delta_1[$. Dobbiamo dunque verificare che $\forall \varepsilon >0 \; \exists \delta > 0$ tale che $|f(x)-f(\overline{x})|<\varepsilon$ per ogni $x\in ]\overline{x}-\delta,\overline{x}+\delta[\cap]x_0-\delta_1,x_0+\delta_1[$. Si ha $g(\overline{x}, f(\overline{x})-\varepsilon)<0<g(\overline{x}, f(\overline{x})-\varepsilon)$. Per la continuità di $g$ e il teorema di permanenza del segno, per ogni $x\in ]\overline{x}-\delta,\overline{x}+\delta[$ si ha:
+				\begin{equation}
+					g(x,f(\overline{x})-\varepsilon)< 0 < g(x,f(\overline{x})+\varepsilon)
+				\end{equation}
+				Poiché $g(x,y)$ è strettamente monotona e continua in $y\in [f(\overline{x})-\varepsilon, f(\overline{x})+\varepsilon]$ esiste un unico $y=f(x)\in[f(\overline{x})-\varepsilon, f(\overline{x})+\varepsilon]$ tale che $g(x,f(x))=0$.
+				\item[Differenziabilità di $f(x)$:] Siano $(x_1,f(x_1),x_2,f(x_2))\in I \times J$ e $\phi=(\phi_1,\phi_2):[0,1]\rightarrow I\times J$ la funzione 
+				\[x=\phi_1(t)=x_1+ t(x_2-x_1), \quad y=\phi_2(t)=f(x_1)+t(f(x_2)-f(x_1)) \]
+				la cui immagine è il segmento di retta passante per i punti $(x_1,f(x_1)),(x_2,f(x_2))\in I\times J$. Per costuzione la funzione 
+				\begin{equation}
+					h(t)=(g\circ \phi)(t)=g(x_1+ t(x_2-x_1),f(x_1)+t(f(x_2)-f(x_1)))
+				\end{equation}
+				è di classe $C^1([0,1],\mathbb{R})$ e per il teorema del valor medio di Lagrange, esiste $c\in]1,0[$ tale che $h'(c)=0$, usando il teorema della funzione composta si ha:
+				\begin{equation}
+					0=h'(c)=g_x(\phi_1(c),\phi_2(c))(x_2-x_1)+g_y(\phi_1(c),\phi_2(c))(f(x_2)-f(x_1))
+				\end{equation}
+				da cui si ricava che:
+				\begin{equation}
+					\dfrac{f(x_2)-f(x_1)}{x_2-x_1}=-\dfrac{g_x(\phi_1(c),\phi_2(c))}{g_y(\phi_1(c),\phi_2(c))}
+				\end{equation}
+				Adesso se facciamo tendere $x_2$ a $x_1$, per la conitnuità della funzione $f$, $f(x_2)$ tende a $f(x_1)$. Pertanto $\phi_1(c)$ tende a $x_1$ e $\phi_2(c)$ tende a $f(x_1)$. Per continuità di $g_x$ e $g_y$ si ha infine che:
+				\begin{equation}
+					f'(x_1)=\lim_{x_2\to x_1}\dfrac{f(x_2)-f(x_1)}{x_2-x_1}=-\dfrac{g_x(x_1,f(x_1))}{g_y(x_1,f(x_1))}.
+				\end{equation}
+			\end{description}
+		\end{proof}
+	\end{theorem}
+	
+	\begin{theorem}[Teorema del Dini a piú dimensioni]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^k$ funzione definita su un aperto $A$ di classe $C^1$. Sia $(x^0,y^0)=(x_1^0,\dots,x_{n-k}^0,y_1^0,\dots,y_k^0)\in A$ soluzione del sistema $g(x,y)=0$, se la jacobiana:
+		\begin{equation}
+			J_{g,y}(x^0,y^0)=\dfrac{\partial g_i}{\partial y_j}(x^0,y^0)
+		\end{equation}
+		è invertibile ($det \, J_{g,y}(x^0,y^0\neq 0)$ allora esistono intorni aperti $I\subseteq \mathbb{R}^{n-k}$, $J\subseteq \mathbb{R}^k$ tali che $(x^0,y^0)\in I \times J \in A$ e $f: I \rightarrow J$ funzione di classe $C^1$ tale che : 
+		\begin{equation}
+			\begin{split}
+				\begin{cases}
+					g_1(x_1,\dots,x_{n-k},y_1,\dots,y_k)=0\\
+					\vdots \\
+					g_k(x_1,\dots,x_{n-k},y_1,\dots,y_k)=0
+				\end{cases}
+			\end{split}
+			\begin{split}
+				\xLeftrightarrow{\text{$I \times J$}} \quad 
+				\begin{cases}
+					y_1=f(x_1,\dots,x_{n-k})\\
+					\vdots \\
+					y_k=f(x_1,\dots,x_{n-k})
+				\end{cases}
+			\end{split}
+		\end{equation}
+		e 
+		\begin{equation}
+			\dfrac{\partial f_i}{\partial x_j}(x_1,\dots,x_k)=-\dfrac{\left|{\dfrac{\partial(g_1,\dots,g_k)}{\partial(y_1,\dots,y_{i-1},x_j,y_{i+1},\dots,y_k)}(x_1,\dots ,x_{n-k},f_1(x),\dots,f_k(x)}\right|}{\left|{\dfrac{\partial(g_1,\dots,g_k)}{\partial(y_1,\dots,y_k)}(x_1,\dots ,x_{n-k},f_1(x),\dots,f_k(x)}\right|}
+		\end{equation}
+	\end{theorem}
+	
+	\section{Estremanti condizionati}
+	\begin{definition}[Varietà regolare]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$. Diremo che $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ è una varietà regolare di $\mathbb{R}^n$ se $\forall x \in \Gamma \; rk(J_f(x))$ ha rango massimo cioè $k$.
+	\end{definition}
+	\begin{definition}[Spazio tangente]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$, $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ varietà regolare, $x_0\in \Gamma$ allora
+		\begin{equation}
+			T_{x_0}\Gamma=\{h\in \mathbb{R}^n | \langle \nabla f_i(x_0), h \rangle = 0\}
+		\end{equation}
+		è detto spazio tangente a $\Gamma$ in $x_0$.
+	\end{definition}
+	\begin{definition}[Spazio normale]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}^{k}$ funzione definita su un aperto $A$ di classe $C^1$, $\Gamma=\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ varietà regolare, $x_0\in \Gamma$ allora
+		\begin{equation}
+			N_{x_0}\Gamma=Span\{\nabla f_i (x_0)\}
+		\end{equation}
+		è detto spazio normale a $\Gamma$ in $x_0$.
+	\end{definition}
+	\begin{definition}[Massimo locale su $\Gamma$]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\Gamma \subseteq A$ una varietà regolare il punto $x_0 \in \Gamma$ è detto di massimo locale per $f$ ristretta a $\Gamma$ se $\exists B(x_0,r) : f(x_0)\ge f(x) \quad \forall x \in \Gamma \cap B(x_0,r)$.
+	\end{definition}
+	\begin{definition}[Minimo locale su $\Gamma$]
+		Sia $f:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\Gamma \subseteq A$ una varietà regolare il punto $x_0 \in \Gamma$ è detto di minimo locale per $f$ ristretta a $\Gamma$ se $\exists B(x_0,r) : f(x_0)\le f(x) \quad \forall x \in \Gamma \cap B(x_0,r)$.
+	\end{definition}
+	\begin{theorem}[Teorema di Fermat per estremanti condizionati]
+		Sia $g:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\Gamma \subseteq A$ una varietà regolare. Sia $x_0 \in \Gamma$ punto di massimo oppure minimo locale di $g$ ristretta a $\Gamma$ allora: 
+		\begin{equation}
+			\forall \hat{\nu}\in T_{x_0}\Gamma \quad \quad \dfrac{\partial g}{\partial \hat{\nu}}(x_0)=0
+		\end{equation}
+		\begin{observation}
+			Dal punto di vista geometrico il teorema di Fermat per estremanti condizionati ci dice che il gradiente della funzione in un punto estremante condizionato è ortogonale a $T_{x_0}\Gamma$ per cui appartiene a $N_{x_0}\Gamma$ per cui $\nabla g(x_0)\in span \{ \nabla f(x_0) \}$ (con $f$ funzione che definisce $\Gamma$).
+		\end{observation}
+	\end{theorem}
+	\begin{theorem}[Teorema dei moltiplicatori di Lagrange]
+		Sia $g:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$, sia $\Gamma \subseteq A$ una varietà regolare $n-k$ dimensionale e supponiamo che $x_0\in \Gamma$ sia punto estremante condizionato di $f$ ristretta a $\Gamma$. Detta funzione lagrangiana:
+		\begin{equation}
+			F(x_1,\dots,x_n,\lambda_1,\dots,\lambda_k)=g(x_1,\dots,x_n)-\lambda_i f_i(x_1,\dots,x_n)
+		\end{equation}
+		allora $\exists\overline{\lambda}_1,\dots,\overline{\lambda}_k \in \mathbb{R}$ tali che: $(x_0,\overline{\lambda}_1,\dots,\overline{\lambda}_k) \in \mathbb{R}^{n+k}$ è punto critico di $F$.
+	\end{theorem}
+	\begin{theorem}
+		Sia $g:A\subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ funzione definita su un aperto $A$ di classe $C^2$, sia $\Gamma =\{ x \in A \; | \; f(x)=(0,\dots,0)\}$ una varietà regolare $n-k$ dimensionale con $f_i\in C^2(A,\mathbb{R})$ e supponiamo che $x_0\in \Gamma$, sia $F$ la funzione lagrangiana associata:
+		\begin{enumerate}
+			\item Se $x_0$ è punto di minimo locale (rispettivamente massimo locale) di $f$ ristretta a $\Gamma$ allora $\exists \overline{\lambda}_1,\dots,\overline{\lambda}_k \in \mathbb{R}$ tali che $\nabla F(x_0,\overline{\lambda}_1,\dots,\overline{\lambda}_k)=0$ e la forma quadratica $H_F(x_0,\overline{\lambda}_1,\dots,\overline{\lambda}_k)$ ristretta ad $(h,\mu)\in T_{x_0}\Gamma \times \mathbb{R}^k$ è semidefinita positiva o definita positiva (rispettivamente semidefinita negativa o definita negativa)
+			\item Se $\exists \overline{\lambda}_1,\dots,\overline{\lambda}_k \in \mathbb{R}$ tali che $\nabla F (x_0,\overline{\lambda}_1,\dots,\overline{\lambda}_k)=0$ e $H_F(x_0,\overline{\lambda}_1,\dots,\overline{\lambda}_k)$ ristretta ad $(h,\mu)\in T_{x_0}\Gamma \times \mathbb{R}^k$ è definita positiva (rispettivamente definita negativa) allora $x_0$ è punto di minimo locale (rispettivamente massimo locale) per $f$ ristretta a $\Gamma$.
+		\end{enumerate}
+	\end{theorem}
+	\section{Misura di Peano-Jordan e integrale multiplo di Riemann}
+	\begin{definition}[Intervallo superiormente semiaperto (i.s.s) e la sua misura] 
+		$I=[a_1,b_1[\times[a_n,b_n[$ con $a_i\le b_i \; \forall i=1,\dots,n$ è detto insieme superiormente semiaperto. Si chiama misura elementare di $I$ e si indica con $\mu_n(I)$ il numero positivo 
+		\[\mu_n(I)=\prod_{j=1}^n(b_j-a_j).\]
+		
+	\end{definition}
+	
+	\begin{definition}[Plurintervallo e la sua misura]
+		Si chiama plurintervallo $P$ l'unione finita e disgiunta di i.s.s. Si chiama misura elementare di $P$ e si indica con $\mu_n(P)$ il numero positivo 
+		\[\mu_n(P)=\sum_{k=1}^q\mu_n(I_k).\]
+		Osservazione: esistono infinite decomposizioni di $P$ come unione disgiunta di i.s.s ma la misura non dipende da esse.
+	\end{definition}
+	\begin{theorem}[Proprietà delle misure dei plurintervalli]
+		Sia $\mathbb{P}=\{P\subseteq \mathbb{R} : P \text{ plurintervallo}\}$
+		\newline 
+		\begin{description}
+			\item [1) Finita additività] Se $P,Q\in \mathbb{P}$ e $P\cap Q=\emptyset $ allora $\mu_n(P\cup P')=\mu_n(P)+\mu_n(Q)$
+			\item [2) Monotonia] Se $P,Q\in \mathbb{P}$ e $P\subseteq Q$ allora $\mu_n(P)\le\mu_n(Q)$
+			\item[3) Modularità] Se $P,Q\in \mathbb{P}$ allora $\mu_n(P\cup Q)+\mu_n(P\cap Q)=\mu_n(P)+\mu_n(Q)$
+			\item [4)] Se $P,Q\in \mathbb{P}$ allora $\mu_n(P\setminus Q)=\mu_n(P)-\mu_n(P\cap Q)$
+			\item [5) Corollario 3) ] Se $P_1,\dots, P_k \in \mathbb{P}$ allora $\mu_n \left(\bigcup_{i=1}^k P_i\right)\le \sum_{i=1}^k \mu_n(P_i) $
+		\end{description}
+	\end{theorem}
+	
+	\begin{definition}[Misura interna ed esterna di un insieme limitato di $\mathbb{R}^n$]
+		Sia $X$ un insieme limitato di $\mathbb{R}^n$. La misura interna $I(X)$ e la misura esterna $E(X)$ secondo Peano-Jordan di $X$ sono definite rispettivamente da:
+		\begin{align*}
+			&I(X)=sup\{\mu_n(P): P \in \mathbb{P}, P \subseteq X\}; \\ 
+			&E(X)=inf\{\mu_n(P) : P \in \mathbb{P}, P \supseteq X\}. 
+		\end{align*}
+		
+	\end{definition}
+	\begin{definition}[Insieme limitato misurabile secondo P-J]
+		Sia $X$ un insieme limitato di $\mathbb{R}^n$, è detto misurabile secondo P-J se $I(X)=E(X)$ e in tal caso chiamiamo misura n-dimensionale di $X$ tale valore, $\mu_n(X)=I(X)=E(X)$. Denoteremo con $J_b(\mathbb{R}^n)$ l'insieme delle parti di $\mathbb{R}^n$ limitate e misurabili secondo P-J.
+	\end{definition}
+	
+	\begin{theorem}[Proprietà della misura]
+		Proprietà della misura di P-J di un insieme limitato:
+		\begin{description}
+			\item[1) Finita additività] Se $X,Y\in J_b(\mathbb{R}^n)$, $X\cap Y = \emptyset$ allora $X\cap Y$ è misurabile e $\mu_n(X\cap Y)=\mu_n(X)+\mu_n(Y)$
+			\item[2) Monotonia] Se $X,Y\in J_b(\mathbb{R}^n), \; X \subseteq Y$ allora $\mu_n(X)\le\mu_n(Y)$
+			\item[3) Modularità] Se $X,\in J_b(\mathbb{R}^n)$ allora $\mu_n(X\cup Y)+\mu_n(X\cap Y)=\mu_n(X)+\mu_n(Y)$
+			\item [4)] Se $X,Y\in J_b(\mathbb{R}^n)$ allora $\mu_n(X \setminus Y)=\mu_n(X)-\mu_n(X\cap Y)$
+			\item [5) Corollario 3) ] Se $X_1,\dots, X_k \in J_b(\mathbb{R}^n)$ allora $\mu_n \left(\bigcup_{i=1}^k X_i\right)\le \sum_{i=1}^k \mu_n(X_i) $
+			\item[6) ] Se $X,Y\in J_b(\mathbb{R}^n)$ allora $int(X),cl(X)\in J_b(\mathbb{R}^n)$ e $\mu_n(X)=\mu_n(int(X))=\mu_n(cl(X))$
+		\end{description}
+	\end{theorem}
+	\begin{theorem}[Caraterizzazione degli insiemi a misura nulla]
+		Insiemi limitati a misura nulla secondo P-J, sia $X$ limitato:
+		\begin{description}
+			\item[1)] $int(X)=\emptyset \Leftrightarrow I(X)=0$.
+			\item[2)] $X\in J_b(\mathbb{R}^n)$ e $\mu_n(X)=0$ $\Leftrightarrow \; \forall \varepsilon > 0 \; \exists P'\in \mathbb{P}, X \subseteq P' : \mu_n(P)<\varepsilon$. 
+			\item[3)] Se $X \in J_b(\mathbb{R}^n)$ allora $int(X)=\emptyset \Leftrightarrow \mu_n(X)=0$
+		\end{description}
+	\end{theorem}
+	
+	\begin{definition}[Misura di un insieme]
+		Sia $X\subseteq \mathbb{R}^n$. Diremo che $X$ è misurabile secondo P-J se $\forall Y \in J_b(\mathbb{R}^n)$ si ha $X \cap Y \in J_b(\mathbb{R}^n)$ allora:
+		\begin{equation}
+			\mu_n(X)=sup_{Y \in J_b(\mathbb{R}^n)}\mu_n(X \cap Y)
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Integrale secondo Riemann]
+		Sia $f:A\subseteq J(\mathbb{R}^n) \rightarrow \mathbb{R}$ limitata e $f(x)\ge 0, \forall x\in A$, sia $R(f)=\{(x,y)\in A\times \mathbb{R}: 0 \le y \le f(x)\} $ il sottografico di f. Allora diciamo che $f$ è integrabile secondo Riemann in $A$ se $R(f)$ è misurabile come sottoinsieme di $\mathbb{R}^{n+1}$ secondo P-J e in tal caso 
+		\begin{equation}
+			\int \dots \int_A f(x_1,\dots ,x_n)dx_1\dots dx_n=\mu_{n+1}R(f)
+		\end{equation}
+		inoltre se $\int \dots \int_A f(x_1,\dots ,x_n)dx_1\dots dx_n\le + \infty$ diremo $f$ sommabile secondo Reimann in $A$.
+	\end{definition}
+	\begin{definition}[Integrale secondo Riemann per funzioni a segno variabile]
+		Sia $f:A\in J(\mathbb{R}^n) \rightarrow \mathbb{R}$ allora definisco due funzioni come segue $f_+,f_-:A\rightarrow \mathbb{R}$ tali che $f_+(x)=max\{f(x),0\}$ e $f_-(x)=max\{-f(x),0\}$. Se $f_+$ e $f_-$ sono integrabili secondo Riemann e almeno uno fra $\int_A f_+$ e $\int_A f_-$ è finito allora definiamo integrale di f in A:
+		\begin{equation}
+			\int_Af(x_1,\dots , x_n)dx_1\dots dx_n=\int_Af_+(x_1,\dots ,x_n)dx_1\dots , dx_n-\int_Af_-(x_1,\dots ,x_n)dx_1\dots dx_n
+		\end{equation}
+		Inoltre se $\int_A f_+,\int_A f_-<+\infty$ allora diremo che $f$ è sommabile in $A$.
+	\end{definition}
+	\begin{theorem}
+		Sia $A\in J(\mathbb{R}^n)$:
+		\begin{description}
+			\item[1) Linearità] Siano $f,g:A\to \mathbb{R}$ sommabili allora $\forall c_1,c_2 \in \mathbb{R}$ $c_1f+c_2g$ è sommabile e 
+			\begin{equation}
+				\int_A[c_1f(x_1,\dots ,x_n)+c_2g(x_1,\dots ,x_n)]dx_1\dots dx_n= c_1\int_Af(x_1, \dots x_n)dx_1 \dots dx_n+c_2\int_Ag(x_1,\dots ,x_n)dx_1 \dots dx_n
+			\end{equation}   
+			\item[2) Additività] Sia $\mu_n(A)<\infty$, $A_1,A_2\subseteq A$ tali che $A_1\cup A_2=A, \, A_1,A_1\in J(\mathbb{R}^n)$ e $\mu_n(A_1\cap A_2)=0$ se $f:A\to \mathbb{R}$ è sommabile allora: 
+			\begin{align*}
+				&\exists \int_{A_1}f, \int_{A_2}f \quad \text{ e}\\
+				\int_Af(x_1,\dots ,x_n)dx_1\dots dx_n=\int_{A_1} &f(x_1,\dots ,x_n)dx_1\dots dx_n+\int_{A_2}f(x_1,\dots ,x_n)dx_1\dots dx_n.
+			\end{align*}
+		\end{description}
+	\end{theorem}
+	\section{Teoremi di riduzione degli integrali multipli}
+	
+	\begin{definition}[Dominio normale rispetto ad un asse]
+		Siano $\psi, \phi:[a,b]\to \mathbb{R} $ continue e tali che $\phi(x)\le \psi(x) \; \forall x\in[a,b]$ allora $A=\{(x,y)\in[a,b]\times\mathbb{R} : \phi(x)\le y \le \psi(x)\}$ si chiama dominio normale rispetto all'asse $y$, $A\in J(\mathbb{R})$ e
+		\begin{equation}
+			\mu_2(A)=\int_a^b[\psi(x)-\phi(x)]dx=\int_a^b\psi(x)dx-\int_a^b\phi(x)dx
+		\end{equation}
+	\end{definition}
+	\begin{theorem}[Riduzione per integrali doppi su domini normali rispetto ad un asse]
+		Siano $\psi, \phi:[a,b]\to \mathbb{R} $ continue e tali che $\phi(x)\le \psi(x) \; \forall x\in[a,b], A=\{(x,y)\in[a,b]\times\mathbb{R} : \phi(x)\le y \le \psi(x)\}$ e $f:A\to \mathbb{R}$ allora :
+		\begin{equation}
+			\iint_Af(x,y)dxdy=\int_c^d\left[\int_{\phi(x)}^{\psi(x)}f(x,y)dy\right]dx
+		\end{equation}
+	\end{theorem}
+	\begin{definition}[Solido di Cavalieri] 
+		Sia $A\subseteq \mathbb{R}^3, A\in J_b (\mathbb{R}^3)$ diremo che $A$ è un solido di Cavalieri se esiste un asse $\lambda $ tale che le sezioni di livello $\overline{\lambda}$ di $A$ sono misurabili $\forall \overline{\lambda} \in [a,b]$ e vuote se $\overline{\lambda} < a, \overline{\lambda} > b$.
+	\end{definition}
+	\begin{theorem}[Riduzione per i solidi di Cavalieri]
+		Sia $A\in J_b(\mathbb{R}^3)$ solido di Cavalieri rispetto all'asse $z$ e tale che $sez_z(A)\in J_b(\mathbb{R}^2),\; \forall z\in [a,b]; \; sez_z(A)=\emptyset \quad\forall z< a, z> b$ allora :
+		\begin{equation}
+			\mu_3(A)=\int_a^b\mu_2(sez_z(A))dz
+		\end{equation}
+		Inoltre se $f:A\to \mathbb{R}$ è continua: 
+		\begin{equation}
+			\iiint_Af(x,y,z)dxdydz=\int_a^bdz\left[\iint_{sez_z(A)}f(x,y,z)dxdy\right]
+		\end{equation}
+	\end{theorem}
+	\begin{definition}[Dominio normale in $\mathbb{R}^3$]
+		Siano $\alpha ,\beta \in C^0(K \subseteq \mathbb{R}^2,\mathbb{R})$ con $K \in J_b(\mathbb{R}^2)$ e sia $\alpha(x,y)\le \beta(x,y) \quad \forall x,y \in K$ allora $A$ definito $A=\{(x,y,z) \in K \times \mathbb{R}:\alpha(x,y)\le z \le \beta(x,y)\}$ è detto dominio normale rispetto all'asse $z$. 
+	\end{definition}
+	\begin{theorem}[Riduzione di integrali tripli su domini normali rispetto ad un asse]
+		Siano $\alpha,\beta \in C^0(K\subseteq \mathbb{R}^2,\mathbb{R})$ con $K\in J_b(\mathbb{R}^2)$ e sia $\alpha(x,y)\le \beta(x,y) \quad \forall x,y\in K$, $A=\{(x,y,z)\in K\times \mathbb{R}:\alpha(x,y)\le z \le \beta(x,y)\}$ allora:
+		\begin{enumerate}
+			\item \begin{equation}       
+				A\in J_b(\mathbb{R}^3) \quad \text{e } \quad\mu_3(A)=\iint_Kdxdy\int_{\alpha(x,y)}^{\beta(x,y)}dz= \iint_K dxdy[\beta(x,y)-\alpha(x,y)]
+			\end{equation}
+			\item \begin{equation}
+				\iiint_Af(x,y,z)dxdydz=\iint_Kdxdy\left[\int_{\alpha(x,y)}^{\beta(x,y)}f(x,y,z)dz\right]
+			\end{equation}
+		\end{enumerate}
+		
+	\end{theorem}
+	
+	
+	\section{Teorema di cambiamento di variabile nell'integrale multiplo}
+	
+	\begin{definition}[Trasformazioni lineari $\mathbb{R}^n \to \mathbb{R}^n$]
+		Sia $f:\mathbb{R}^n \to \mathbb{R}^n$ una trasformazione, è detta lineare se:
+		\begin{itemize}
+			\item $f(u+v)=f(u) + f(v), \quad \quad \forall u,v \in \mathbb{R}^n.$
+			\item $f(cv)=cf(v), \quad \quad \quad \; \; 
+			\forall u\in \mathbb{R}^n, \forall c \in \mathbb{R}.$
+		\end{itemize}
+		Inoltre sia $A\in M_{n\times n}$ la matrice associata alla trasformazione lineare $f$ allora $\left| det(A) \right|$ è il fattore con cui vengono modificati i volumi degli oggetti contenuti negli spazi. 
+	\end{definition}
+	
+	\begin{theorem}[Teorema di cambiamento di variabile nell'integrale multiplo]
+		Sia $A\subseteq \mathbb{R}^n$ e $\Phi \in C^1(A,\mathbb{R})$ tale che $detJ_\Phi \neq 0$ e $1-1$. Sia $K\subseteq A$, $K\in J_b(\mathbb{R}^n)$ compatto e connesso e $f\in C^0(\Phi(K),\mathbb{R})$. Allora:
+		\begin{enumerate}
+			\item $\Phi(K)$ è compatto, connesso e in $J_b(\mathbb{R}^n)$:
+			\begin{equation}
+				\mu_n(\Phi(K))=\int \dots \int_{\Phi(K)}dx_1 \dots dx_n=\int \dots \int_K\left| detJ_\Phi (u_1,\dots ,u_n)\right| du_1\dots du_n
+			\end{equation}
+			\item Caso generale del cambiamento di variabile:
+			\begin{equation}
+				\int \dots \int_{\Phi(K)}f(x_1,\dots ,x_n)dx_1\dots dx_n=\int \dots \int_K(f \circ \Phi)(u_1, \dots, u_n)\left| detJ_\Phi (u_1,\dots ,u_n)\right| du_1\dots du_n
+			\end{equation}
+		\end{enumerate}
+		\begin{observation}[$detJ_\Phi \neq 0$ e $1-1$]
+			A differenza del caso lineare nel caso lineare $detJ_\Phi \neq 0$ non garantisce l'iniettività globale della $\Phi$, per questo nelle ipotesi vengono richieste entrambe.
+		\end{observation}
+		\begin{observation}[q.o.]
+			Il teorema resta valido se $detJ_\Phi \neq 0$ quasi ovunque in $K$ e $\Phi$ è $1-1$ quasi ovunque su $K$.    
+		\end{observation}
+	\end{theorem}
+	\begin{theorem}[Passaggio a coordinate polari nel piano]
+		
+		La trasformazione da coordinate polari $(r,\varphi)$ a coordinate cartesiani $(x,y)$, è data dalla funzione $\Phi : \mathbb{R}^+ \times [0,2\pi[ \to \mathbb{R}^2$ di componenti: 
+		
+		\begin{align*} 
+			x&=r\cos \varphi ;\\y&=r\sin \varphi .
+		\end{align*}
+		La cui jacobiana è:
+		\begin{equation}
+			J _{\Phi} (r,\varphi )=\dfrac{\partial(x,y)}{\partial(r,\varphi)}={\begin{bmatrix}\cos \varphi &-r\sin \varphi \\\sin \varphi &r\cos \varphi \end{bmatrix}}
+		\end{equation}
+		di determinante $r$ da cui:
+		\begin{equation}
+			\iint _{\Phi(A)}f(x,y)\,dx\,dy=\iint _{A}f(r\cos \varphi ,r\sin \varphi )\,r\,dr\,d\varphi .
+		\end{equation}
+	\end{theorem}
+	\begin{theorem}[Passaggio a coordinate sferiche in $\mathbb{R}^3$]
+		La trasformazione da coordinate sferiche $(\rho,\varphi,\theta)$ a coordinate cartesiane $(x,y,z)$, è data dalla funzione $\Phi : \mathbb{R}^+ \times [0,\pi[ \times [0,2\pi[ \to \mathbb{R}^3$ di componenti:
+		\begin{align*}
+			x&=\rho \sin \varphi \cos \theta ;\\y&=\rho \sin \varphi \sin \theta ;\\z&=\rho \cos \varphi .
+		\end{align*}
+		La cui jacobiana è:
+		\begin{equation}
+			J _{\Phi}(\rho ,\varphi ,\theta )=\dfrac{\partial(x,y,z)}{\partial(\rho,\varphi,\theta)}={\begin{bmatrix}\sin \varphi \cos \theta &\rho \cos \varphi \cos \theta &-\rho \sin \varphi \sin \theta \\\sin \varphi \sin \theta &\rho \cos \varphi \sin \theta &\rho \sin \varphi \cos \theta \\\cos \varphi &-\rho \sin \varphi &0\end{bmatrix}}.
+		\end{equation}
+		di determinante $\rho^2 \sin(\varphi)$, da cui:
+		
+		\begin{equation}
+			\iiint _{\Phi(A)}f(x,y,z)\,dx\,dy\,dz=\iiint _{A}f(\rho \sin \varphi \cos \theta ,\rho \sin \varphi \sin \theta ,\rho \cos \varphi )\,\rho ^{2}\sin \varphi \,d\rho \,d\varphi \,d\theta .
+		\end{equation}
+	\end{theorem}
+	\begin{theorem}[Passaggio a coordinate cilindriche in $\mathbb{R}^3$]
+		La trasformazione da coordinate cilindriche $(r,h,\theta)$ a coordinate cartesiane $(x,y,z)$, è data dalle funzione $\Phi : \mathbb{R} \times \mathbb{R}^+ \times [0,2\pi[ \to \mathbb{R}^3$ di componenti: 
+		\begin{align*}
+			x&=r\,\cos \theta \\y&=r\,\sin \theta \\z&=h 
+		\end{align*}
+		La cui jacobiana è:
+		\begin{equation}
+			J_{\Phi}(r,\theta ,h)={\frac {\partial (x,y,z)}{\partial (r,\theta ,h)}}={\begin{bmatrix}\cos \theta &-r\sin \theta &0\\\sin \theta &r\cos \theta &0 \\ 0 & 0 & 1\end{bmatrix}}
+		\end{equation}
+		di determinante $r$, da cui:
+		\begin{equation}
+			\iiint _{\Phi(A)}f(x,y,z)\,dx\,dy\,dz=\iint _{A}f(r\cos \theta ,r\sin \theta , h)\,r\,dr\,d\theta \, dh .
+		\end{equation}
+	\end{theorem}
+	\begin{observation}
+		Mancano le dimostrazioni che insiemi di misura nulla vanno in insiemi di misura nulla, le spiegazioni vengono bene anche con i disegni. 
+	\end{observation}
+	\section{Campi conservativi}
+	
+	\begin{definition}[Campo vettoriale]
+		Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso un campo vettoriale è una funzione $F:X \to \mathbb{R}^n$.
+	\end{definition}
+	
+	\begin{definition}[Curva]
+		È detta curva un'applicazione $\varphi : I \subseteq \mathbb{R} \to \mathbb{R}^n$. Le equazioni:
+		\begin{equation}
+			\begin{split}
+				\begin{cases}
+					x_1= \varphi_1 (t)\\
+					x_2= \varphi_2 (t)\\
+					\dots \\
+					x_n= \varphi_n (t)
+				\end{cases}
+			\end{split}
+			\begin{split}
+				\quad \quad \quad \quad 
+				t \in I.
+			\end{split}
+		\end{equation}
+		sono dette equazioni parametriche della curva di parametro $t$.
+	\end{definition}
+	
+	\begin{definition}[Curva semplice]
+		Una curva $\varphi: I \to \mathbb{R}^n$ è detta semplice se presi due punti qualsiasi distinti $t_1, t_2$ in $I$ di cui almeno uno interno a $I$ è vero $\varphi(t_1)\neq \varphi(t_2)$.
+	\end{definition}    
+	
+	\begin{definition}[Curva chiusa]
+		Una curva $\varphi: I \to \mathbb{R}^n$ definita su $I=[a,b]$ chiuso e limitato è detta chiusa se $\varphi(a)=\varphi(b)$. 
+	\end{definition}
+	
+	\begin{definition}[Curva regolare]
+		Una curva $\varphi: I \to \mathbb{R}$ è detta regolare se $\varphi \in C^1(I,\mathbb{R}) $ e $\varphi '(t) \neq 0 \quad \forall t \in I.$
+	\end{definition}
+	
+	\begin{definition}[Cambiamento di parametrizzazione di una curva]
+		Sia $\varphi: [a,b] \to \mathbb{R}^n$ di classe $C^1$, sia $\psi : [\alpha,\beta] \to [a,b]$ un diffeo $C^1$:
+		\begin{equation}
+			\xymatrix{[\alpha,\beta] \ar@/_1pc/[rr]_{\varphi \circ \psi} 
+				\ar[r]^{\psi}  &[a,b] \ar[r]^{\varphi} & \gamma = \varphi [a,b]\\}
+		\end{equation}
+		allora $(\varphi \circ \psi) [\alpha, \beta] = \gamma$ (il sostegno della curva è invariato) e $(\varphi \circ \psi) \in C^1$ inoltre:
+		\begin{itemize}
+			\item se $\varphi$ è semplice aperta allora che $(\varphi \circ \psi)$ è semplice aperta. 
+			\item se $\varphi$ è semplice chiusa allora che $(\varphi \circ \psi)$ è semplice chiusa, inoltre se $\psi$ è un diffeo crescente allora $a=\psi(\alpha)$ e $b=\psi(\beta)$ se è un diffeo decrescente allora $a=\psi(\beta)$ e $b=\psi(\alpha)$.
+			\item se $\rho : [\alpha,\beta]\to \gamma$ e $\varphi : [a,b] \to \gamma$ allora $\exists \psi : [\alpha, \beta] \to [a,b]$ diffeo $C^1$ tale che:\begin{equation}
+				\xymatrix{[a,b] \ar[d]_{\psi} \ar[dr]^{\varphi}\\
+					[\alpha,\beta] \ar[r]_{\rho} & \gamma}
+			\end{equation}
+		\end{itemize}
+		\begin{observation}
+			$\gamma$ ha quindi infinite parametrizzazioni equivalenti per diffeo $C^1$ avremmo quindi una classe di equivalenza delle parametrizzazioni $C^1$ che hanno come immagine $\gamma$:
+			\begin{equation}
+				\varphi \sim \rho \; \text{ se } \; \exists \psi : [\alpha,\beta] \to [a,b] \; \text{ diffeo $C^1$ } \; : \rho = \varphi \circ \psi, \; \varphi = \rho \circ \psi^{-1}.
+			\end{equation}
+		\end{observation}
+	\end{definition}
+	
+	\begin{definition}[Orientamento del sostegno di una curva]
+		Diremo che $\gamma$ è orientata con orientamento $T$ se $\exists T : \gamma \to \mathbb{R}^n$ continua tale che: $\forall x \in T \quad T(x)\in T_x\gamma$, $\;\lVert T(x) \rVert =1.$
+	\end{definition}
+	
+	\begin{definition}[Effetto sull'orientamento del cambiamento di parametrizzazione]
+		Sia $\varphi : [a,b] \to \gamma$ con $\gamma$ orientabile $(\varphi '(t)\in T_{\varphi(t)})$,  $\psi: [\alpha,\beta]$ diffeo $C_1$ allora $\rho(\tau)=(\varphi \circ \psi)(\tau)$ è una parametrizzazione equivalente a $\varphi$. Orientamento indotto dalla parametrizzazione $\rho:$
+		\begin{equation}
+			\dfrac{\dfrac{d \rho }{d \tau} (\tau)}{\lVert \dfrac{d \rho}{d \tau}(\tau)\rVert}= \dfrac{ \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau )  }{\lVert  \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau ) \rVert}=\text{sgn} \left( \dfrac{d \psi }{d \tau }( \tau )\right) \cdot \dfrac{ \dfrac{d \varphi }{ dt } (\psi ( \tau ))}{\lVert \dfrac{d \varphi }{ dt } (\psi ( \tau ))\rVert}
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Lunghezza di una curva]
+		Sia $\varphi : [a,b] \to \mathbb{R}^n$ una curva, ad ogni partizione $a = t_0 < t_1 < \dots < t_p = b$ possiamo associare la spezzata $\Pi$ definendone la lunghezza $l(\Pi)=\sum \lVert \varphi(t_j)-\varphi(t_{j-1}) \rVert$. Definiamo ora la lunghezza ella curva $L(\varphi)=sup\{l(\Pi)\}$.
+		Sia $\varphi$ regolare allora:
+		\begin{equation}
+			L_{\gamma}=\int_a^b\lVert \varphi '(t)\rVert dt.
+		\end{equation}    
+	\end{definition}
+	
+	\begin{theorem}[Invarianza della lunghezza di una curva rispetto a parametrizzazioni equivalenti]
+		Siano $\varphi : [a,b] \to \gamma$ una curva regolare e $\psi : [\alpha, \beta] \to [a,b]$ diffeo $C^1$,  $\rho : [\alpha,\beta]\to \gamma$ tale che $\rho(\tau)=(\varphi \circ \psi)(\tau)$ allora:   
+		\begin{equation}
+			\begin{aligned}
+				L_p=\int_{\alpha}^{\beta} \lVert \dfrac{d \rho}{d \tau}(\tau)\rVert d\tau= \int_{\alpha}^{\beta} \lVert  \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau ) \rVert d\tau &= \int_{\alpha}^{\beta} \text{sgn}\left( \dfrac{d\psi}{d\tau}(\tau)\right) \cdot \dfrac{d\psi}{d\tau}(\tau) \cdot \lVert \dfrac{d \varphi }{ dt } (\psi ( \tau ))\rVert\tau= \\
+				&=\int_{\psi(\alpha)}^{\psi(\beta)}\lVert \dfrac{d \varphi}{dt}(t)\rVert\cdot \text{sgn}\left(\dfrac{d\psi}{dt}(\psi^{-1}(\tau))\right)dt 
+			\end{aligned}
+		\end{equation}
+	\end{theorem}
+	
+	\begin{definition}[Ascissa curvlinea]
+		Sia $\varphi :[a,b]\to \mathbb{R}^n$ una generica rappresentazione parametrica della curva $\gamma$ e fissato un $t_0\in[a,b]$ la funzione: 
+		\begin{equation}
+			s(t)=\int_{t_0}^t\lVert \varphi'(\tau)\rVert d\tau, \quad \forall t \in [a,b]
+		\end{equation}
+		è strettamente crescente, derivabile e di derivata positiva per ogni $t$, $s(t)$ è quindi un cambiamento di parametro ammissibile e il parametro $s$ è detto ascissa curvilinea. 
+	\end{definition}
+	
+	\begin{definition}[Campo vettoriale]
+		Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso un campo vettoriale è una funzione $F:X \to \mathbb{R}^n$.
+	\end{definition}
+	
+	\begin{definition}[Lavoro]
+		Sia $f: A \subseteq \mathbb{R}^n \to \mathbb{R}^n$ continua con $\gamma \subset A$ di orientamento $\hat{\tau}$, sia inoltre detta una 1-forma differenziale un'applicazione $\omega : A \to \left(\mathbb{R}^n\right)^*$ che associa ogni elemento al suo funzionale lineare $\omega=\langle f(x), dx \rangle$. È definito lavoro l'integrale:
+		\begin{equation}
+			L=\int_{\gamma,\tau}\omega=\int_{\gamma,\tau}\langle f(x),dx\rangle =\int_{\gamma}\langle f(x),\tau(x)\rangle ds
+		\end{equation}
+		(con $x=u(s)$, $s$ ascissa curvilinea associata all'orientamento $\hat{\tau}$)
+		\begin{observation}
+			L è invariante rispetto a un cambiamento di parametrizzazione associati a diffeo crescenti. Invece sia $-\gamma$ una curva equivalente a $\gamma$ ma orientata in verso opposto (cambiamento di parametrizzazione per diffeo decrescente)
+			\begin{equation}
+				\int_{-\gamma}\omega=-\int_{\gamma}\omega.
+			\end{equation}
+		\end{observation}
+		\begin{observation}[Campi conservativi]
+			Sia $f$ un campo vettoriale definito su $A\subseteq\mathbb{R}^n$ è detto conservativo se $\exists U \in C^1(A,\mathbb{R})$ tale che:
+			\begin{equation}
+				f(x)=\nabla U(x) \quad \quad \forall x\in A.
+			\end{equation}
+			
+			
+			
+		\end{observation}
+	\end{definition}
+	\begin{theorem}[Caratterizzazione dei campi conservativi]
+		Sia $f\in C^0(A,\mathbb{R}^n)$ campo vettoriale allora le seguenti affermazioni sono equivalenti:
+		\begin{enumerate}
+			\item $f$ è conservativo.
+			\item Il lavoro su ogni coppia di curve regolari a tratti orientabili con estremi coincidenti è tra loro uguale.
+			\item Il lavoro su ogni curva regolare a tratti orientabile e chiusa è nullo.
+		\end{enumerate}
+	\end{theorem}
+	\begin{theorem}
+		Sia $f$ un campo vettoriale definito su $A\subseteq\mathbb{R}^n$:
+		\begin{itemize}
+			\item Se $f$ conservativo allora :      \begin{equation}
+				\omega=\langle f(x),dx\rangle= \sum f_j(x)dx_j=\sum \dfrac{\partial U}{\partial x_j}(x)dx_j=dU(x)
+			\end{equation}
+			quindi se $f$ è un campo vettoriale conservativo $\omega$ è una 1-forma differenziale esatta. E inoltre per ogni curva orientabile orientata $(\gamma,\hat{\tau})$ di estremi $P_1,P_2$ si ha: 
+			\begin{equation}
+				\int_{\gamma,\tau}\omega = U(P_2)-U(P_1).
+			\end{equation}
+			\item La condizione di irrotazionalità di $f$ è necessaria per la sua conservatività. Inoltre se $f$ è irrotazionale $\omega$ è una 1-forma chiusa. 
+			\item (\textit{Lemma di Poincaré}) Se $A$ è semplicemente connesso e $f$ è irrotazionale allora è anche conservativo.
+			\item Se $f$ è irrotazionale allora è localmente conservativo per lemma di Poincaré.
+		\end{itemize}
+		
+	\end{theorem}
+	\section{Aperti regolari}
+	
+	\begin{definition}[Superficie]
+		$\Sigma\in\mathbb{R}^3$ è detta superficie se $\exists r :\overline{\Omega} \to \Sigma$ di classe $C^1$ tale che:
+		\begin{equation}
+			\begin{split}
+				(x,y,z)\in \Sigma \quad \quad \quad 
+			\end{split}
+			\begin{split}
+				\begin{cases}
+					x=r_1(u,v)\\
+					y=r_2(u,v) \quad \quad  (u,v)\in \overline{\Omega}.\\
+					z=r_3(u,v)\\
+				\end{cases}
+			\end{split}    
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Superficie regolare]
+		$\Sigma$ è detta superficie regolare se esiste $r\in C^1(\overline{\Omega}, \mathbb{R}^3)$ con $\Omega \subseteq \mathbb{R}^2$ aperto regolare tale che:
+		\begin{itemize}
+			\item $r(\overline{\Omega)}=\Sigma$
+			\item $J_r(u,v)$ ha rango massimo $\forall (u,v)\in \Omega$
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}[Superficie semplice]
+		$\Sigma$ è detta superficie semplice se esiste $\Omega \in \mathbb{R}^2$ e $r\in C^1(\overline{\Omega},\mathbb{R}^3)$ tale che:
+		\begin{itemize}
+			\item $r(\overline{\Omega})=\Sigma$
+			\item $\xymatrix{r:\Omega \ar[r]^{1-1} &\Sigma}$
+		\end{itemize}
+	\end{definition}
+	
+	\begin{definition}[Superficie orientabile]
+		Sia $\Sigma \in \mathbb{R}^3 $ una superficie. Diremo che è   orientabile se esiste $N:\Sigma \to \mathbb{R}^3$ tale che :
+		\begin{equation}
+			\forall(x,y,z)\in \Sigma \; : \quad N(x,y,z)\in N_{(x,y,z)}\Sigma \quad \text{e} \quad \lVert N(x,y,z) \rVert = 1
+		\end{equation}
+		in tal caso $N$ è detto orientamento di $\Sigma$.
+	\end{definition}
+	
+	\begin{definition}[Superficie regolare con bordo]
+		$\Sigma$ è detta superficie regolare con bordo se esiste $r\in C^1(\overline{\Omega}, \mathbb{R}^3)$ con $\Omega \subseteq \mathbb{R}^2$ aperto regolare tale che:
+		\begin{itemize}
+			\item $\xymatrix{r(\overline{\Omega)}\ar[r]^{1-1} &\Sigma}$
+			\item $J_r(u,v)$ ha rango massimo $\forall (u,v)\in \overline{\Omega}$
+		\end{itemize}
+	\end{definition}
+	
+	\begin{observation}[Orientamento indotto del bordo]
+		L'orientamento $\hat{\nu}$ di $\Sigma$ induce un orientamento naturale del bordo $\partial \Sigma$ con il versore $\hat{\tau}$ e l'orientamento $\hat{\tau}$ è quello con il quale si gira in senso antiorario $\partial\Sigma$ rispetto ad un osservatore in piedi sulla superficie rispetto all'orientamento $\hat{\tau}$.
+	\end{observation}
+	
+	\begin{definition}{Area di una superficie}
+		Se $\Sigma$ è una superficie regolare e $\xymatrix{r:\overline{\Omega}\ar[r]^{su} &\Sigma}$ è una parametrizzazione regolare definisco la quantità area della superficie:
+		\begin{equation}
+			A(\Sigma)=\int_{\Sigma}d \sigma = \iint_{\overline{\Omega}}\lVert \dfrac{\partial r}{\partial u}\wedge \dfrac{\partial r}{\partial v}(u,v)\rVert du dv.
+		\end{equation}
+	\end{definition}
+	
+	\begin{definition}[Flusso di un campo vettoriale attraverso una superficie]
+		Sian $\Sigma$ una superficie regolare, $\xymatrix{r:\overline{\Omega}\ar[r]^{su} &\Sigma}$ una parametrizzazione regolare, $F\in C^1(A\in \mathbb{R}^3, \mathbb{R}^3$ e $\hat{\nu}$ l'orientamento di $\Sigma$ definisco il flusso di $F$ attraverso $\Sigma$ come l'integrale: 
+		\begin{equation}
+			\begin{aligned}
+				\int_{\Sigma} \langle F, \hat{\nu}\rangle d \sigma &= \iint_{\overline{\Omega}}\langle \left(F \circ r\right) (u,v),\dfrac{ \dfrac{\partial r}{\partial u}\wedge \dfrac {\partial r}{\partial v} (u,v) }{\lVert \dfrac{\partial r}{\partial u}\wedge \dfrac{\partial r}{\partial v} (u,v) \rVert}\rangle \cdot  \lVert \dfrac{\partial r}{\partial u}\wedge \dfrac{\partial r}{\partial v} (u,v) \rVert dudv \\ &=\iint_{\overline{\Omega}}\langle \left(F \circ r\right) (u,v), \dfrac{\partial r}{\partial u}\wedge \dfrac {\partial r}{\partial v} (u,v) \rangle dudv
+			\end{aligned}
+		\end{equation}
+		\end {definition}
+		
+		\section{Teorema di Stokes}
+		
+		
+		\begin{definition}[Campo vettoriale]
+			Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso un campo vettoriale è una funzione $F:X \to \mathbb{R}^n$.
+		\end{definition}
+		
+		\begin{definition}[Rotore]
+			Sia $X \subseteq \mathbb{R}^3$ insieme aperto e connesso, un campo vettoriale $F:X \to \mathbb{R}^3$ è detto rotore di F:
+			\begin{equation}
+				\nabla \wedge F= \begin{vmatrix}\mathbf {i} &\mathbf {j} &\mathbf {k} \\\\{\frac {\partial }{\partial x}}&{\frac {\partial }{\partial y}}&{\frac {\partial }{\partial z}}\\\\F_{x}&F_{y}&F_{z}\end{vmatrix}=\hat{i} \left({\frac {\partial F_{z}}{\partial y}}-{\frac {\partial F_{y}}{\partial z}}\right)+\hat{j} \left({\frac {\partial F_{x}}{\partial z}}-{\frac {\partial F_{z}}{\partial x}}\right)+\hat{k} \left({\frac {\partial F_{y}}{\partial x}}-{\frac {\partial F_{x}}{\partial y}}\right).
+			\end{equation}
+		\end{definition}
+		
+		\begin{definition}[Superficie orientabile]
+			Sia $\Sigma \in \mathbb{R}^3 $ una superficie. Diremo che è   orientabile se esiste $N:\Sigma \to \mathbb{R}^3$ tale che :
+			\begin{equation}
+				\forall(x,y,z)\in \Sigma \; : \quad N(x,y,z)\in N_{(x,y,z)}\Sigma \quad \text{e} \quad \lVert N(x,y,z) \rVert = 1
+			\end{equation}
+			in tal caso $N$ è detto orientamento di $\Sigma$.
+		\end{definition}
+		
+		\begin{definition}[Superficie regolare con bordo]
+			$\Sigma$ è detta superficie regolare con bordo se esiste $r\in C^1(\overline{\Omega}, \mathbb{R}^3)$ con $\Omega \subseteq \mathbb{R}^2$ aperto regolare tale che:
+			\begin{itemize}
+				\item $\xymatrix{r(\overline{\Omega)}\ar[r]^{1-1} &\Sigma}$
+				\item $J_r(u,v)$ ha rango massimo $\forall (u,v)\in \overline{\Omega}$
+			\end{itemize}
+		\end{definition}
+		
+		\begin{observation}[Orientamento indotto del bordo]
+			L'orientamento $\hat{\nu}$ di $\Sigma$ induce un orientamento naturale del bordo $\partial \Sigma$ con il versore $\hat{\tau}$ e l'orientamento $\hat{\tau}$ è quello con il quale si gira in senso antiorario $\partial\Sigma$ rispetto ad un osservatore in piedi sulla superficie rispetto all'orientamento $\hat{\tau}$.
+		\end{observation}
+		
+		\begin{theorem}
+			Sia $A\subseteq \mathbb{R}^3$ aperto, $F\in C^1 (A,\mathbb{R}^3)$, $(\Sigma, \hat{\nu})$ superficie regolare orientabile, $\Sigma\subseteq A$ e sia $(\partial \Sigma,\hat{\tau})$ il suo bordo canonicamente orientato allora:
+			\begin{equation}
+				\iint_{\Sigma}\langle \nabla \wedge F, \hat{\nu}\rangle d \sigma = \int_{\partial \Sigma}\langle F, \hat{\tau}\rangle ds
+			\end{equation}
+		\end{theorem}
+		
+		\section{Teorema della divergenza}
+		
+		
+		\begin{definition}[Campo vettoriale]
+			Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso un campo vettoriale è una funzione $F:X \to \mathbb{R}^n$.
+		\end{definition}
+		
+		\begin{definition}[Divergenza]
+			Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso, un campo vettoriale $F:X \to \mathbb{R}^n$ è detta divergenza di F:
+			\begin{equation}
+				\langle \nabla , F \rangle = \frac{\partial F_1}{\partial x} +\frac{\partial F_2}{\partial y} +\frac{\partial F_3}{\partial z} = Tr \, J_F(x,y,z)
+			\end{equation}
+		\end{definition}
+		
+		\begin{definition}[Aperto regolare]
+			$A\subseteq \mathbb{R}^3$ è un aperto regolare se è un insieme aperto, limitato, connesso e $int(cl(A))=A$. E se $\partial A$ è unione disgiunta di superfici regolari a tratti chiuse e orientabili. Inoltre $\partial A$ è orientato canonicamente dal campo vettoriale $\hat{\nu}: \partial A \to \mathbb{R}^3$ inoltre se $\partial A$ ha normale esterna allora $\forall P \in \partial A \; \exists \delta > 0$  tale che:
+			\begin{equation}
+				\begin{split}
+					\begin{aligned}
+						& P + \lambda (\hat{\nu})\not\in \overline{A} \\
+						& P - \lambda (\hat{\nu}) \in \overline{A} 
+					\end{aligned}
+				\end{split} \quad \quad \quad 
+				\begin{split}
+					\forall 0<\lambda <\delta.
+				\end{split}
+			\end{equation}
+		\end{definition}
+		
+		\begin{definition}[Superficie regolare con bordo]
+			$\Sigma$ è detta superficie regolare con bordo se esiste $r\in C^1(\overline{\Omega}, \mathbb{R}^3)$ con $\Omega \subseteq \mathbb{R}^2$ aperto regolare tale che:
+			\begin{itemize}
+				\item $\xymatrix{r(\overline{\Omega)}\ar[r]^{1-1} &\Sigma}$
+				\item $J_r(u,v)$ ha rango massimo $\forall (u,v)\in \overline{\Omega}$
+			\end{itemize}
+		\end{definition}
+		
+		\begin{definition}[Superficie orientabile]
+			Sia $\Sigma \in \mathbb{R}^3 $ una superficie. Diremo che è   orientabile se esiste $N:\Sigma \to \mathbb{R}^3$ tale che :
+			\begin{equation}
+				\forall(x,y,z)\in \Sigma \; : \quad N(x,y,z)\in N_{(x,y,z)}\Sigma \quad \text{e} \quad \lVert N(x,y,z) \rVert = 1
+			\end{equation}
+			in tal caso $N$ è detto orientamento di $\Sigma$.
+		\end{definition}
+		
+		\begin{definition}[Flusso di un campo vettoriale attraverso una superficie]
+			Sian $\Sigma$ una superficie regolare, $\xymatrix{r:\overline{\Omega}\ar[r]^{su} &\Sigma}$ una parametrizzazione regolare, $F\in C^1(A\in \mathbb{R}^3, \mathbb{R}^3$ e $\hat{\nu}$ l'orientamento di $\Sigma$ definisco il flusso di $F$ attraverso $\Sigma$ come l'integrale: 
+			\begin{equation}
+				\begin{aligned}
+					\int_{\Sigma} \langle F, \hat{\nu}\rangle d \sigma &= \iint_{\overline{\Omega}}\langle \left(F \circ r\right) (u,v),\dfrac{ \dfrac{\partial r}{\partial u}\wedge \dfrac {\partial r}{\partial v} (u,v) }{\lVert \dfrac{\partial r}{\partial u}\wedge \dfrac{\partial r}{\partial v} (u,v) \rVert}\rangle \cdot  \lVert \dfrac{\partial r}{\partial u}\wedge \dfrac{\partial r}{\partial v} (u,v) \rVert dudv \\ &=\iint_{\overline{\Omega}}\langle \left(F \circ r\right) (u,v), \dfrac{\partial r}{\partial u}\wedge \dfrac {\partial r}{\partial v} (u,v) \rangle dudv
+				\end{aligned}
+			\end{equation}
+			\end {definition}
+			
+			\begin{theorem}[Teorema della divergenza]
+				Sia $F\in C^2(cl(A), \mathbb{R}^3)$, $A$ aperto regolare in $\mathbb{R}^3$, ($A\in J_b(\mathbb{R}^3$), $(\partial A, \hat{\nu})$ frontiera di $A$ con $\hat{\nu}$ orientamento esterno allora:
+				\begin{equation}
+					\iiint_A \nabla \cdot F dxdydz=\iint_{\partial A} \langle F, \hat{\nu} \rangle d\sigma
+				\end{equation}
+			\end{theorem}
+			
+			
+		\end{document} 
+		
+		
