@@ -11,7 +11,7 @@
 \usepackage{multirow}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[italian]{babel}
 
 
 \makeatletter
@@ -23,12 +23,12 @@
 
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}{Definizione}[section]
 \numberwithin{equation}{section}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corollario}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{observation}[theorem]{Observation}
+\newtheorem{observation}[theorem]{Osservazione}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \input xy
@@ -80,7 +80,7 @@
 	
 	
 	\begin{definition}[Insieme aperto in uno s.m.]
-		Un insieme $A\subseteq X$ si dice aperto se ogni suo punto é centro di un intorno circolare contenuto in A, in altre parole $\forall x_0 \in A \quad \exists B(x_0,r)\subseteq A$. 
+		Un insieme $A\subseteq X$ si dice aperto se ogni suo punto é centro di un intorno circolare contenuto in A, in altre parole $\forall x_0 \in X \quad \exists B(x_0,r)\subseteq A$. 
 	\end{definition}
 	
 	\begin{definition}[Proprietà degli aperti]
@@ -176,7 +176,7 @@
 	\end{definition}
 	
 	\begin{theorem}[Principio di Cantor]
-		Sia $(X,d)$ uno spazio metrico è completo iff per ogni successione di insiemi chiusi non vuoti tali che $F_k \in X$, $F_{k+1} \subseteq F_k$ si ha che $\bigcap_{k\in\mathbb{N}}F_k\neq \emptyset$.
+		Sia $(X,d)$ uno spazio metrico è completo se e solo se per ogni successione di insiemi chiusi non vuoti tali che $F_k \in X$, $F_{k+1} \subseteq F_k$ si ha che $\bigcap_{k\in\mathbb{N}}F_k\neq \emptyset$.
 	\end{theorem}
 	\begin{theorem}[Completamento di uno s.m.]
 		Sia $(X,d)$ uno spazio metrico, un completamento di X è una coppia $(Y,\phi)$ tale che Y è uno spazio metrico completo, $\phi$ una isometria tra X tale che $\phi(X)$ è denso in Y.
@@ -273,7 +273,7 @@
 		\begin{enumerate}
 			\item $f$ è continua in $x$.
 			\item $m=\nabla f (x)$, cioè esistono le derivate di $f$ e $m_i=f_{x_j}(x).$ La differenziabilità implica quindi la derivabilità in un punto, non è vero invece il contrario.
-			\item $\forall \hat{\nu} \in \mathbb{R}^3, \lVert \hat{\nu} \rVert =1 \quad \exists \, \dfrac{\partial f }{\partial \hat{\nu}}(x)= \langle \nabla f(x), \hat{\nu} \rangle$.
+			\item $\forall \hat{\nu} \in \mathbb{R}^3, \lVert \hat{\nu} \rVert \quad \exists \, \dfrac{\partial f }{\partial \hat{\nu}}(x)$.
 		\end{enumerate} 
 		$\quad$ \textbf{Differenziale totale}: Se esistono $f_{x_i}(x), \; \forall i = 1, \dots ,n$ in un intorno di $x$ e sono continue in $x$ allora $f$ è differenziabile in $x$.
 		\\
@@ -333,7 +333,7 @@
 		\begin{proof}
 			$(f\circ f^{-1})(y)=y, \quad \forall \, x \in B$ per la teorema del Jacobiano della funzione composta si ha: 
 			\begin{equation}
-				I=J_{(f \circ f^{-1})}(y)=J_{f^{-1}}(y)J_f(f^{-1}(y))
+				I=J_{(f \circ f^{-1})}(y)=J_{f^{-1}}(y)J_f(f^-1(y))
 			\end{equation}
 			da cui la tesi. 
 		\end{proof}
@@ -631,7 +631,7 @@
 	\end{theorem}
 	\section{Misura di Peano-Jordan e integrale multiplo di Riemann}
 	\begin{definition}[Intervallo superiormente semiaperto (i.s.s) e la sua misura] 
-		$I=[a_1,b_1[\times[...[\times[a_n,b_n[$ con $a_i\le b_i \; \forall i=1,\dots,n$ è detto insieme superiormente semiaperto. Si chiama misura elementare di $I$ e si indica con $\mu_n(I)$ il numero positivo 
+		$I=[a_1,b_1[\times[a_n,b_n[$ con $a_i\le b_i \; \forall i=1,\dots,n$ è detto insieme superiormente semiaperto. Si chiama misura elementare di $I$ e si indica con $\mu_n(I)$ il numero positivo 
 		\[\mu_n(I)=\prod_{j=1}^n(b_j-a_j).\]
 		
 	\end{definition}
@@ -673,7 +673,7 @@
 			\item[3) Modularità] Se $X,\in J_b(\mathbb{R}^n)$ allora $\mu_n(X\cup Y)+\mu_n(X\cap Y)=\mu_n(X)+\mu_n(Y)$
 			\item [4)] Se $X,Y\in J_b(\mathbb{R}^n)$ allora $\mu_n(X \setminus Y)=\mu_n(X)-\mu_n(X\cap Y)$
 			\item [5) Corollario 3) ] Se $X_1,\dots, X_k \in J_b(\mathbb{R}^n)$ allora $\mu_n \left(\bigcup_{i=1}^k X_i\right)\le \sum_{i=1}^k \mu_n(X_i) $
-			\item[6) ] Se $X\in J_b(\mathbb{R}^n)$ allora $int(X),cl(X)\in J_b(\mathbb{R}^n)$ e $\mu_n(X)=\mu_n(int(X))=\mu_n(cl(X))$
+			\item[6) ] Se $X,Y\in J_b(\mathbb{R}^n)$ allora $int(X),cl(X)\in J_b(\mathbb{R}^n)$ e $\mu_n(X)=\mu_n(int(X))=\mu_n(cl(X))$
 		\end{description}
 	\end{theorem}
 	\begin{theorem}[Caraterizzazione degli insiemi a misura nulla]
@@ -713,7 +713,7 @@
 			\begin{equation}
 				\int_A[c_1f(x_1,\dots ,x_n)+c_2g(x_1,\dots ,x_n)]dx_1\dots dx_n= c_1\int_Af(x_1, \dots x_n)dx_1 \dots dx_n+c_2\int_Ag(x_1,\dots ,x_n)dx_1 \dots dx_n
 			\end{equation}   
-			\item[2) Additività] Sia $\mu_n(A)<\infty$, $A_1,A_2\subseteq A$ tali che $A_1\cup A_2=A, \, A_1,A_2\in J(\mathbb{R}^n)$ e $\mu_n(A_1\cap A_2)=0$ se $f:A\to \mathbb{R}$ è sommabile allora: 
+			\item[2) Additività] Sia $\mu_n(A)<\infty$, $A_1,A_2\subseteq A$ tali che $A_1\cup A_2=A, \, A_1,A_1\in J(\mathbb{R}^n)$ e $\mu_n(A_1\cap A_2)=0$ se $f:A\to \mathbb{R}$ è sommabile allora: 
 			\begin{align*}
 				&\exists \int_{A_1}f, \int_{A_2}f \quad \text{ e}\\
 				\int_Af(x_1,\dots ,x_n)dx_1\dots dx_n=\int_{A_1} &f(x_1,\dots ,x_n)dx_1\dots dx_n+\int_{A_2}f(x_1,\dots ,x_n)dx_1\dots dx_n.
@@ -731,7 +731,7 @@
 	\begin{theorem}[Riduzione per integrali doppi su domini normali rispetto ad un asse]
 		Siano $\psi, \phi:[a,b]\to \mathbb{R} $ continue e tali che $\phi(x)\le \psi(x) \; \forall x\in[a,b], A=\{(x,y)\in[a,b]\times\mathbb{R} : \phi(x)\le y \le \psi(x)\}$ e $f:A\to \mathbb{R}$ allora :
 		\begin{equation}
-			\iint_Af(x,y)dxdy=\int_a^b\left[\int_{\phi(x)}^{\psi(x)}f(x,y)dy\right]dx
+			\iint_Af(x,y)dxdy=\int_c^d\left[\int_{\phi(x)}^{\psi(x)}f(x,y)dy\right]dx
 		\end{equation}
 	\end{theorem}
 	\begin{definition}[Solido di Cavalieri] 
@@ -777,7 +777,7 @@
 	\end{definition}
 	
 	\begin{theorem}[Teorema di cambiamento di variabile nell'integrale multiplo]
-		Sia $A\subseteq \mathbb{R}^n$ aperto e $\Phi \in C^1(A,\mathbb{R})$ tale che $detJ_\Phi \neq 0$ e $1-1$. Sia $K\subseteq A$, $K\in J_b(\mathbb{R}^n)$ compatto e connesso e $f\in C^0(\Phi(K),\mathbb{R})$. Allora:
+		Sia $A\subseteq \mathbb{R}^n$ e $\Phi \in C^1(A,\mathbb{R})$ tale che $detJ_\Phi \neq 0$ e $1-1$. Sia $K\subseteq A$, $K\in J_b(\mathbb{R}^n)$ compatto e connesso e $f\in C^0(\Phi(K),\mathbb{R})$. Allora:
 		\begin{enumerate}
 			\item $\Phi(K)$ è compatto, connesso e in $J_b(\mathbb{R}^n)$:
 			\begin{equation}
@@ -888,8 +888,8 @@
 		\end{equation}
 		allora $(\varphi \circ \psi) [\alpha, \beta] = \gamma$ (il sostegno della curva è invariato) e $(\varphi \circ \psi) \in C^1$ inoltre:
 		\begin{itemize}
-			\item se $\varphi$ è semplice aperta allora anche $(\varphi \circ \psi)$ è semplice aperta. 
-			\item se $\varphi$ è semplice chiusa allora anche $(\varphi \circ \psi)$ è semplice chiusa, inoltre se $\psi$ è un diffeo crescente allora $a=\psi(\alpha)$ e $b=\psi(\beta)$ se è un diffeo decrescente allora $a=\psi(\beta)$ e $b=\psi(\alpha)$.
+			\item se $\varphi$ è semplice aperta allora che $(\varphi \circ \psi)$ è semplice aperta. 
+			\item se $\varphi$ è semplice chiusa allora che $(\varphi \circ \psi)$ è semplice chiusa, inoltre se $\psi$ è un diffeo crescente allora $a=\psi(\alpha)$ e $b=\psi(\beta)$ se è un diffeo decrescente allora $a=\psi(\beta)$ e $b=\psi(\alpha)$.
 			\item se $\rho : [\alpha,\beta]\to \gamma$ e $\varphi : [a,b] \to \gamma$ allora $\exists \psi : [\alpha, \beta] \to [a,b]$ diffeo $C^1$ tale che:\begin{equation}
 				\xymatrix{[a,b] \ar[d]_{\psi} \ar[dr]^{\varphi}\\
 					[\alpha,\beta] \ar[r]_{\rho} & \gamma}
@@ -908,7 +908,7 @@
 	\end{definition}
 	
 	\begin{definition}[Effetto sull'orientamento del cambiamento di parametrizzazione]
-		Sia $\varphi : [a,b] \to \gamma$ con $\gamma$ orientabile $(\varphi '(t)\in T_{\varphi(t)})$,  $\psi: [\alpha,\beta]\to [a,b]$ diffeo $C_1$ allora $\rho(\tau)=(\varphi \circ \psi)(\tau)$ è una parametrizzazione equivalente a $\varphi$. Orientamento indotto dalla parametrizzazione $\rho:$
+		Sia $\varphi : [a,b] \to \gamma$ con $\gamma$ orientabile $(\varphi '(t)\in T_{\varphi(t)})$,  $\psi: [\alpha,\beta]$ diffeo $C_1$ allora $\rho(\tau)=(\varphi \circ \psi)(\tau)$ è una parametrizzazione equivalente a $\varphi$. Orientamento indotto dalla parametrizzazione $\rho:$
 		\begin{equation}
 			\dfrac{\dfrac{d \rho }{d \tau} (\tau)}{\lVert \dfrac{d \rho}{d \tau}(\tau)\rVert}= \dfrac{ \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau )  }{\lVert  \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau ) \rVert}=\text{sgn} \left( \dfrac{d \psi }{d \tau }( \tau )\right) \cdot \dfrac{ \dfrac{d \varphi }{ dt } (\psi ( \tau ))}{\lVert \dfrac{d \varphi }{ dt } (\psi ( \tau ))\rVert}
 		\end{equation}
@@ -926,7 +926,7 @@
 		Siano $\varphi : [a,b] \to \gamma$ una curva regolare e $\psi : [\alpha, \beta] \to [a,b]$ diffeo $C^1$,  $\rho : [\alpha,\beta]\to \gamma$ tale che $\rho(\tau)=(\varphi \circ \psi)(\tau)$ allora:   
 		\begin{equation}
 			\begin{aligned}
-				L_\rho=\int_{\alpha}^{\beta} \lVert \dfrac{d \rho}{d \tau}(\tau)\rVert d\tau= \int_{\alpha}^{\beta} \lVert  \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau ) \rVert d\tau &= \int_{\alpha}^{\beta} \text{sgn}\left( \dfrac{d\psi}{d\tau}(\tau)\right) \cdot \dfrac{d\psi}{d\tau}(\tau) \cdot \lVert \dfrac{d \varphi }{ dt } (\psi ( \tau ))\rVert d\tau= \\
+				L_p=\int_{\alpha}^{\beta} \lVert \dfrac{d \rho}{d \tau}(\tau)\rVert d\tau= \int_{\alpha}^{\beta} \lVert  \dfrac{d \varphi }{ dt } (\psi ( \tau ))  \cdot \dfrac{d \psi }{d \tau }( \tau ) \rVert d\tau &= \int_{\alpha}^{\beta} \text{sgn}\left( \dfrac{d\psi}{d\tau}(\tau)\right) \cdot \dfrac{d\psi}{d\tau}(\tau) \cdot \lVert \dfrac{d \varphi }{ dt } (\psi ( \tau ))\rVert\tau= \\
 				&=\int_{\psi(\alpha)}^{\psi(\beta)}\lVert \dfrac{d \varphi}{dt}(t)\rVert\cdot \text{sgn}\left(\dfrac{d\psi}{dt}(\psi^{-1}(\tau))\right)dt 
 			\end{aligned}
 		\end{equation}
@@ -1041,7 +1041,7 @@
 	\end{definition}
 	
 	\begin{observation}[Orientamento indotto del bordo]
-		L'orientamento $\hat{\nu}$ di $\Sigma$ induce un orientamento naturale del bordo $\partial \Sigma$ con il versore $\hat{\tau}$ e l'orientamento $\hat{\tau}$ è quello con il quale si gira in senso antiorario $\partial\Sigma$ rispetto ad un osservatore in piedi sulla superficie rispetto all'orientamento $\hat{\nu}$.
+		L'orientamento $\hat{\nu}$ di $\Sigma$ induce un orientamento naturale del bordo $\partial \Sigma$ con il versore $\hat{\tau}$ e l'orientamento $\hat{\tau}$ è quello con il quale si gira in senso antiorario $\partial\Sigma$ rispetto ad un osservatore in piedi sulla superficie rispetto all'orientamento $\hat{\tau}$.
 	\end{observation}
 	
 	\begin{definition}{Area di una superficie}
@@ -1068,7 +1068,7 @@
 		\end{definition}
 		
 		\begin{definition}[Rotore]
-			Sia $X \subseteq \mathbb{R}^3$ insieme aperto e connesso, un campo vettoriale $F:X \to \mathbb{R}^3$ è detto rotore di F:
+			Sia $X \subseteq \mathbb{R}^n$ insieme aperto e connesso, un campo vettoriale $F:X \to \mathbb{R}^n$ è detto rotore di F:
 			\begin{equation}
 				\nabla \wedge F= \begin{vmatrix}\mathbf {i} &\mathbf {j} &\mathbf {k} \\\\{\frac {\partial }{\partial x}}&{\frac {\partial }{\partial y}}&{\frac {\partial }{\partial z}}\\\\F_{x}&F_{y}&F_{z}\end{vmatrix}=\hat{i} \left({\frac {\partial F_{z}}{\partial y}}-{\frac {\partial F_{y}}{\partial z}}\right)+\hat{j} \left({\frac {\partial F_{x}}{\partial z}}-{\frac {\partial F_{z}}{\partial x}}\right)+\hat{k} \left({\frac {\partial F_{y}}{\partial x}}-{\frac {\partial F_{x}}{\partial y}}\right).
 			\end{equation}
